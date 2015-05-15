@@ -1,0 +1,9 @@
+Phase: MarkProfileSection
+Input: Token Lookup
+Options: control = once debug = true
+
+Rule: MarkProfileSection
+(({Token})[0, 500]):profileSection
+{Lookup.majorType == section_heading}
+-->
+:profileSection.Section = {kind = profileSection}

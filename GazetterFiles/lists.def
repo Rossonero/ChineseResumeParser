@@ -1,0 +1,6 @@
+profile_header.lst:section_heading:profile
+work_experience_header.lst:section_heading:work_experience
+project_experience_header.lst:section_heading:project_experience
+education_history_header.lst:section_heading:education_history
+surname.lst:surname
+degree.lst:degree
