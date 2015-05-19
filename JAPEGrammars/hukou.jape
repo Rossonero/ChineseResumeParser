@@ -1,0 +1,22 @@
+Phase: HukouFinder
+Input: Token Lookup
+Options: control = appelt debug = false
+
+Rule:StrongHukouRule
+Priority:100
+{Token.string == "户口"}
+({!Token.category =~ "(NN|NR|NT)"})[1, 2]
+({Lookup.majorType == "hukou"}):hukouLookup
+-->
+:hukouLookup{
+	try{
+		Annotation lookupInstance = hukouLookupAnnots.iterator().next();
+		String hukou = (String) lookupInstance.getFeatures().get("minorType");
+		FeatureMap gfeature = Factory.newFeatureMap();
+		gfeature.put("hukou", hukou);
+		gfeature.put("rule", "strong");
+		outputAS.add(lookupInstance.getStartNode().getOffset(), lookupInstance.getEndNode().getOffset(), "Hukou", gfeature);
+	}
+	catch(InvalidOffsetException e)
+	{}
+}

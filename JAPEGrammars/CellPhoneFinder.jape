@@ -1,0 +1,36 @@
+Phase: CellPhoneFinder
+Input: Lookup Token
+Options: control = appelt debug = false
+
+Rule: StrongCellPhoneRuleBefore
+Priority:100
+({Lookup.minorType == cellphone})
+({Token})?
+(
+ {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
+)
+:cellPhoneLookup
+-->
+:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+
+Rule: StrongCellPhoneRuleAfter
+Priority:80
+(
+ {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
+)
+({Token})?
+({Lookup.minorType == cellphone})
+:cellPhoneLookup
+-->
+:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+
+
+Rule: NormalCellPhoneRule
+Priority: 50
+({!Token.string =~ "(QQ|qq|id|ID|Id)"})[1, 2]
+(
+ {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
+)
+:cellPhoneLookup
+-->
+:cellPhoneLookup.Phone = {kind = CellPhone, conf = normal}
