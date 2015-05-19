@@ -8,3 +8,7 @@ gender_male.lst:gender:male
 gender_female.lst:gender:female
 cell_phone_identifier.lst:phone:cellphone
 phone_identifier.lst:phone:telephone
+colleges.lst:colleges:normal
+adultcolleges.lst:colleges:adult
+independentcolleges.lst:colleges:independent
+armycolleges.lst:colleges:army

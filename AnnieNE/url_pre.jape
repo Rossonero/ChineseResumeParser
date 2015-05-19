@@ -20,6 +20,7 @@ Options: control = appelt
 Rule: Urlpre
 
 (	(({Token.string == "http"}	|
+	  {Token.string == "https"}	|
 	  {Token.string == "ftp"})
 	 {Token.string == ":"}
 	 {Token.string == "/"}

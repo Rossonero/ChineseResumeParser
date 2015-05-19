@@ -15,25 +15,15 @@
 
 MultiPhase:	TestTheGrammars
 Phases:
-numberletter 
 first
-firstname
-name
-name_post
 date_pre
 date
 reldate
-number
-number_clean
 address
 url_pre
 url
 email
-identifier
-jobtitle
 final
 unknown
-name_context
 org_context
-loc_context
 clean
