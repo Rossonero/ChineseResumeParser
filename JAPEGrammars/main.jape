@@ -6,10 +6,19 @@
 MultiPhase: ResumeParser
 Phases:
 MarkSections
-/*ProfileSection
-NameFinder
-EmailFinder
+CellPhoneFinder
 PhoneFinder
+GenderFinder
+EmailFinder
+
+/*ProfileSection
+DateRangeFinder
+
+
+NameFinder
+
+
+
 AddressFinder
 URLFinder
 TitleFinder

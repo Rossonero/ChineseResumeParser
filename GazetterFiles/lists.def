@@ -4,3 +4,7 @@ project_experience_header.lst:section_heading:project_experience
 education_history_header.lst:section_heading:education_history
 surname.lst:surname
 degree.lst:degree
+gender_male.lst:gender:male
+gender_female.lst:gender:female
+cell_phone_identifier.lst:phone:cellphone
+phone_identifier.lst:phone:telephone
