@@ -23,6 +23,8 @@ address
 url_pre
 url
 email
+cell_phone
+phone
 final
 unknown
 org_context

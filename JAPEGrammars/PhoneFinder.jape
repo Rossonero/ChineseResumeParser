@@ -8,17 +8,16 @@ Priority:100
 ({Token})?
 (
  {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !Phone.kind == CellPhone}
-)
-:telePhoneLookup
+):telePhoneLookup
 -->
 :telePhoneLookup.Phone = {kind = TelePhone, conf = strong}
 
 Rule: NormalTelePhoneRule
 Priority:50
-({!Token.string =~ "(QQ|qq|id|ID|Id)"})[1, 2]
+({!Token.string =~ "(QQ|qq|id|ID|Id)"})
+({!Token.string =~ "(QQ|qq|id|ID|Id)"})
 (
  {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !Phone.kind == CellPhone}
-)
-:telePhoneLookup
+):telePhoneLookup
 -->
 :telePhoneLookup.Phone = {kind = TelePhone, conf = normal}

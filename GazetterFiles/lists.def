@@ -8,7 +8,12 @@ gender_male.lst:gender:male
 gender_female.lst:gender:female
 cell_phone_identifier.lst:phone:cellphone
 phone_identifier.lst:phone:telephone
-colleges.lst:colleges:normal
-adultcolleges.lst:colleges:adult
-independentcolleges.lst:colleges:independent
-armycolleges.lst:colleges:army
+colleges_moe.lst:colleges:moe
+colleges_adult.lst:colleges:adult
+colleges_independent.lst:colleges:independent
+colleges_army.lst:colleges:army
+colleges_hk.lst:colleges:hk
+colleges_userdefined.lst:colleges:userdefined
+major_moe.lst:major:moe
+major_userdefined.lst:major:userdefined
+year:year
