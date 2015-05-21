@@ -1,0 +1,46 @@
+Phase: CellPhoneFinder
+Input: Lookup Token
+Options: control = appelt debug = false
+
+Rule: StrongCellPhoneRuleBefore
+Priority:100
+{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+{Lookup.minorType == cellphone, !Token.string =~ "(QQ|qq|id|ID|Id)"}
+({Token})?
+(
+ {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
+):cellPhoneLookup
+-->
+:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+
+Rule: StrongCellPhoneRuleAfter
+Priority:80
+{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+(
+ {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
+):cellPhoneLookup
+({Token})?
+({Lookup.minorType == cellphone})
+-->
+:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+
+Rule: StrongCellPhoneRule86
+Priority:70
+{Token.kind == number, Token.string =~ "0?86"}
+({Token.kind == punctuation})?
+(
+ {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
+):cellPhoneLookup
+-->
+:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+
+Rule: NormalCellPhoneRule
+Priority: 50
+{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+(
+ {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
+):cellPhoneLookup
+-->
+:cellPhoneLookup.Phone = {kind = CellPhone, conf = normal}

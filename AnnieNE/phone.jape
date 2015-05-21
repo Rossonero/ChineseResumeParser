@@ -1,0 +1,37 @@
+Phase: TelePhoneFinder
+Input: Lookup Token Phone
+Options: control = appelt debug = false
+
+Rule: StrongTelePhoneRuleBefore
+Priority:100
+{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+{Lookup.minorType == telephone, !Token.string =~ "(QQ|qq|id|ID|Id)"}
+({Token})?
+(
+ {Token.kind == number, Token.length >= 7, Token.length <= 8,Token.string =~ "^[2-9]\\d{6,7}$"}
+):telePhoneLookup
+-->
+:telePhoneLookup.Phone = {kind = TelePhone, conf = strong}
+
+Rule: StrongtelePhoneRule86
+Priority:70
+{Token.kind == number, Token.string =~ "0?86"}
+({Token.kind == punctuation})?
+({Token.kind == number, Token.string =~ "0?\\d{2,3}"}
+({Token.kind == punctuation})?
+ {Token.kind == number, Token.length >= 7, Token.length <= 8,Token.string =~ "^[2-9]\\d{6,7}$"}
+):telePhoneLookup
+
+-->
+:telePhoneLookup.Phone = {kind = telePhone, conf = normal}
+
+Rule: NormaltelePhoneRule
+Priority: 50
+{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+(
+ {Token.kind == number, Token.length >= 7, Token.length <= 8,Token.string =~ "^[2-9]\\d{6,7}$"}
+):telePhoneLookup
+{!Token.string == "@"}
+-->
+:telePhoneLookup.Phone = {kind = telePhone, conf = weak}
