@@ -1,46 +1,46 @@
-Phase: CellPhoneFinder
+Phase: MobileFinder
 Input: Lookup Token
 Options: control = appelt debug = false
 
-Rule: StrongCellPhoneRuleBefore
+Rule: StrongMobileRuleBefore
 Priority:100
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
-{Lookup.minorType == cellphone, !Token.string =~ "(QQ|qq|id|ID|Id)"}
+{Lookup.minorType == Mobile, !Token.string =~ "(QQ|qq|id|ID|Id)"}
 ({Token})?
 (
  {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
-):cellPhoneLookup
+):MobileLookup
 -->
-:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+:MobileLookup.Phone = {kind = Mobile, conf = strong}
 
-Rule: StrongCellPhoneRuleAfter
+Rule: StrongMobileRuleAfter
 Priority:80
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
 (
  {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
-):cellPhoneLookup
+):MobileLookup
 ({Token})?
-({Lookup.minorType == cellphone})
+({Lookup.minorType == Mobile})
 -->
-:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+:MobileLookup.Phone = {kind = Mobile, conf = strong}
 
-Rule: StrongCellPhoneRule86
+Rule: StrongMobileRule86
 Priority:70
 {Token.kind == number, Token.string =~ "0?86"}
 ({Token.kind == punctuation})?
 (
  {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
-):cellPhoneLookup
+):MobileLookup
 -->
-:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+:MobileLookup.Phone = {kind = Mobile, conf = strong}
 
-Rule: NormalCellPhoneRule
+Rule: NormalMobileRule
 Priority: 50
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
 (
  {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
-):cellPhoneLookup
+):MobileLookup
 -->
-:cellPhoneLookup.Phone = {kind = CellPhone, conf = normal}
+:MobileLookup.Phone = {kind = Mobile, conf = normal}

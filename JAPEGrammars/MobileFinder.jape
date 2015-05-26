@@ -1,36 +1,36 @@
-Phase: CellPhoneFinder
+Phase: MobileFinder
 Input: Lookup Token
 Options: control = appelt debug = false
 
-Rule: StrongCellPhoneRuleBefore
+Rule: StrongMobileRuleBefore
 Priority:100
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
-{Lookup.minorType == cellphone, !Token.string =~ "(QQ|qq|id|ID|Id)"}
+{Lookup.minorType == mobile, !Token.string =~ "(QQ|qq|id|ID|Id)"}
 ({Token})?
 (
  {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
-):cellPhoneLookup
+):mobileLookup
 -->
-:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+:mobileLookup.Phone = {kind = mobile, conf = strong}
 
-Rule: StrongCellPhoneRuleAfter
+Rule: StrongMobileRuleAfter
 Priority:80
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
 (
  {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
-):cellPhoneLookup
+):mobileLookup
 ({Token})?
-({Lookup.minorType == cellphone})
+({Lookup.minorType == mobile})
 -->
-:cellPhoneLookup.Phone = {kind = CellPhone, conf = strong}
+:mobileLookup.Phone = {kind = mobile, conf = strong}
 
-Rule: NormalCellPhoneRule
+Rule: NormalmobileRule
 Priority: 50
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
 {!Token.string =~ "(QQ|qq|id|ID|Id)"}
 (
  {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
-):cellPhoneLookup
+):mobileLookup
 -->
-:cellPhoneLookup.Phone = {kind = CellPhone, conf = normal}
+:mobileLookup.Phone = {kind = mobile, conf = normal}

@@ -1,0 +1,13 @@
+Phase: HukouFinder
+Input: Token Lookup SpaceToken
+Options: control = once debug = false
+
+Rule:StrongHukouRule
+Priority:100
+({Lookup.majorType == "hukou"} | {Token.string == "户口"} | {Token.string == "户籍"})
+({!Token.category =~ "(NN|NR|NT)"})[0, 2]
+{SpaceToken}
+(({Token})[1, 10]):hukouLookup
+{SpaceToken}
+-->
+:hukouLookup.Hukou = {rule = strong}
