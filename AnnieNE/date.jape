@@ -122,25 +122,6 @@ Macro: NUM_OR_ORDINAL
 Macro: COMMA
 ({Token.string == ","})
 
-
-Macro:  TIME_ZONE
-(({Lookup.minorType == zone})|
- ({Token.string == "("}
-  {Lookup.minorType == zone}
-  {Token.string == ")"})
-)
-
-Macro: TIME_DIFF
-(
- ({Token.string == "+"}|{Token.string == "-"})
- (FOUR_DIGIT)
-)
-
-Macro: TIME_AMPM
-(
- {Lookup.minorType == ampm}
-)
-
 //////////////////////////////////////////////////////////////////
 
 // Date Rules
@@ -318,18 +299,6 @@ Rule: YearAdBc
 :year -->
  :year.YearTemp = {kind = "positive", rule = "YearAdBc"}
 
-Rule: YearSpan1
-// the early 90s
-// the late 80s
-(
- {Token.string == "the"}
- (DATE_PRE)?
- (YEAR)
- ({Token.string == "'"})?
- ({Token.string == "s"})
-)
-:date -->
- :date.TempDate = {rule = "YearSpan1"}
 
 Rule: YearSpan2
 // 1980/81

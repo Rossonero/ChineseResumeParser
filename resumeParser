@@ -155,7 +155,7 @@
               </entry>
               <entry>
                 <string>wholeWordsOnly</string>
-                <boolean>true</boolean>
+                <boolean>false</boolean>
               </entry>
               <entry>
                 <string>document</string>

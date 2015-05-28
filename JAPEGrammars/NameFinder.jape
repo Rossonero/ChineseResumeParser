@@ -6,4 +6,4 @@ Priority 50
 ({PERSON})
 :person
 -->
-: = {}
+person: = {}

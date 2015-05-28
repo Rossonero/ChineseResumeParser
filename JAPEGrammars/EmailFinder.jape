@@ -7,4 +7,4 @@ Rule: EmailRule
 )
 :emailLookup
 -->
-:emailLookup.Email = { kind = email}
+:emailLookup.EMAIL = { kind = email}

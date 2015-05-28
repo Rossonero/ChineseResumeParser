@@ -11,7 +11,7 @@ Priority:100
  {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
 ):mobileLookup
 -->
-:mobileLookup.Phone = {kind = mobile, conf = strong}
+:mobileLookup.MOBILE = {conf = strong}
 
 Rule: StrongMobileRuleAfter
 Priority:80
@@ -23,7 +23,7 @@ Priority:80
 ({Token})?
 ({Lookup.minorType == mobile})
 -->
-:mobileLookup.Phone = {kind = mobile, conf = strong}
+:mobileLookup.MOBILE = {conf = strong}
 
 Rule: NormalmobileRule
 Priority: 50
@@ -33,4 +33,4 @@ Priority: 50
  {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
 ):mobileLookup
 -->
-:mobileLookup.Phone = {kind = mobile, conf = normal}
+:mobileLookup.MOBILE = {conf = normal}

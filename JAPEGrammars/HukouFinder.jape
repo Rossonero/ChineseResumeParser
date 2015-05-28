@@ -10,4 +10,4 @@ Priority:100
 (({Token})[1, 10]):hukouLookup
 {SpaceToken}
 -->
-:hukouLookup.Hukou = {rule = strong}
+:hukouLookup.HUKOU = {rule = strong}

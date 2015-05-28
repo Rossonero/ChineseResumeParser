@@ -6,7 +6,7 @@ surname.lst:surname:::SURNAME
 degree.lst:degree:::DEGREE
 gender_male.lst:gender:male::GENDER
 gender_female.lst:gender:female::GENDER
-cell_phone_identifier.lst:phone:cellphone
+mobile_identifier.lst:mobile_title
 phone_identifier.lst:phone:telephone
 colleges_moe.lst:colleges:moe::COLLEGE
 colleges_adult.lst:colleges:adult::COLLEGE
@@ -15,6 +15,12 @@ colleges_army.lst:colleges:army::COLLEGE
 colleges_hk.lst:colleges:hk::COLLEGE
 colleges_userdefined.lst:colleges:userdefined::COLLEGE
 major_moe.lst:major:moe::MAJOR
-major_userdefined.lst:major:userdefined::MAJOR
-year:year
+major_userdefined.lst :major:userdefined::MAJOR
 hukou.lst:hukou
+city.lst:city:::LOCATION
+province.lst:province:::LOCATION
+area.lst:area:::LOCATION
+year.lst:year
+month.lst:date:month
+date.lst:date:ordinal
+date_unit.lst:date_unit

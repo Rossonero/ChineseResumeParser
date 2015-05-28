@@ -7,17 +7,17 @@ Priority:100
 ({Lookup.minorType == telephone})
 ({Token})?
 (
- {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !Phone.kind == CellPhone}
+ {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !Phone.kind == MOBILE}
 ):telePhoneLookup
 -->
-:telePhoneLookup.Phone = {kind = TelePhone, conf = strong}
+:telePhoneLookup.PHONE = {kind = TelePhone, conf = strong}
 
 Rule: NormalTelePhoneRule
 Priority:50
 ({!Token.string =~ "(QQ|qq|id|ID|Id)"})
 ({!Token.string =~ "(QQ|qq|id|ID|Id)"})
 (
- {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !Phone.kind == CellPhone}
+ {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !Phone.kind == MOBILE}
 ):telePhoneLookup
 -->
-:telePhoneLookup.Phone = {kind = TelePhone, conf = normal}
+:telePhoneLookup.PHONE = {kind = TelePhone, conf = normal}
