@@ -1,0 +1,49 @@
+Phase: DateFinder
+Input: Lookup Token
+Options: control = appelt debug = false
+
+Rule: YearMonthDate
+(	
+	{Lookup.minorType == year}
+	{Lookup.minorType == month}
+	{Lookup.minorType == date}
+)
+:DateLookup
+-->
+:DateLookup.Date = { kind = yearmonthdate}
+
+Rule: YearMonth
+(	
+	{Lookup.minorType == year}
+	{Lookup.minorType == month}
+)
+:DateLookup
+-->
+:DateLookup.Date = { kind = yearmonth}
+
+Rule: DateMonthYear
+(	
+	{Lookup.minorType == date}
+	{Lookup.minorType == month}
+	{Lookup.minorType == year}
+)
+:DateLookup
+-->
+:DateLookup.Date = { kind = datemonthyear}
+
+Rule: MonthYear
+(	
+	{Lookup.minorType == month}
+	{Lookup.minorType == year}
+)
+:DateLookup
+-->
+:DateLookup.Date = { kind = monthyear}
+
+Rule: YearOnly
+(	
+	{Lookup.minorType == year}
+)
+:DateLookup
+-->
+:DateLookup.Date = { kind = year}

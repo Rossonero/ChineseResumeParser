@@ -36,23 +36,12 @@ Macro: FOUR_DIGIT
 Macro: DAY_MONTH_NUM
 (ONE_DIGIT | TWO_DIGIT)
 
-Macro: DATE_PRE
-// possible modifiers of dates, eg. "early October"
-({Token.string == "early"}|
- {Token.string == "late"}|
- {Token.string == "mid"}|
- {Token.string == "mid-"}|
- {Token.string == "end"}
-)
-
 Macro: DAY 
-(((DATE_PRE)?
-  DAY_NAME) |
+((DAY_NAME) |
  DAY_MONTH_NUM)
 
 Macro: MONTH_NAME
-( (DATE_PRE)?
-  {Lookup.minorType == month})
+({Lookup.minorType == month})
 
 Macro: MONTH 
 (MONTH_NAME | DAY_MONTH_NUM)
@@ -69,26 +58,6 @@ Macro: DOT
 Macro: OF
   {Token.string == "of"}
 
-Macro: AD_BC
-  (  {Token.string == "ad"} | {Token.string == "AD"}
-  |
-    ({Token.string == "a"} {Token.string == "."}
-     {Token.string == "d"} {Token.string == "."})
-  |
-    ({Token.string == "A"} {Token.string == "."}
-     {Token.string == "D"} {Token.string == "."})
-  |
-
-    {Token.string == "bc"} | {Token.string == "BC"}
-  |
-    ({Token.string == "b"} {Token.string == "."}
-     {Token.string == "c"} {Token.string == "."})
-   
-  |
-    ({Token.string == "B"} {Token.string == "."}
-     {Token.string == "C"} {Token.string == "."})
-  )
-
 Macro: YEAR
 (        
  {Lookup.majorType == year}|
@@ -96,15 +65,6 @@ Macro: YEAR
  {Token.string == "'"}
  (TWO_DIGIT)
 )
-
-
-Macro:  XDAY
-(
- ({Token.orth == upperInitial} |
-  {Token.orth == allCaps})
- {Token.string == "Day"}
-)
-
 
 Macro: ORDINAL
 (
@@ -199,7 +159,6 @@ Priority: 20
 -->
  :date.TempDate = {rule = "DateName"}
 
-
 Rule: DateNameSpan1
 // 5-20 Jan
 
@@ -242,7 +201,6 @@ Rule: DateNameRev
 -->
  :date.TempDate = {rule = "DateNameRev"}
 
-
 Rule: DateNumDash
 // 01-07-00
 // Note: not 07-00
@@ -266,7 +224,6 @@ Rule: DateNumDashRev
 -->
  :date.TempDate = {rule = "DateNumDashRev"}
 
-
 Rule: DateNumSlashDot
 // 01/07/00
 // Note: not 07/00
@@ -277,28 +234,6 @@ DAY_MONTH_NUM (SLASH|DOT) DAY_MONTH_NUM (SLASH|DOT) YEAR
 :date
 -->
  :date.TempDate = {rule = "DateNumSlashDot"}
-
-
-Rule: ModifierMonth
-//early October
-
-( DATE_PRE 
-  {Lookup.minorType == month}
-)
-:date -->
- :date.TempDate = {rule = "ModifierMonth"}
-
-
-Rule: YearAdBc
-
-// 1900 AD
-(
- (YEAR 
-  AD_BC)
-)
-:year -->
- :year.YearTemp = {kind = "positive", rule = "YearAdBc"}
-
 
 Rule: YearSpan2
 // 1980/81
@@ -333,7 +268,6 @@ Priority: 80
 :date -->
  :date.TempDate = {rule = "YearSpan3"}
 
-
 Rule: YearContext1
 Priority: 40
 ({Token.string == "in"}|
@@ -342,7 +276,6 @@ Priority: 40
 (YEAR)
 :date -->
  :date.TempDate = {rule = "YearContext1"}
-
 
 // Currently, temp1, temp2 and temp3 look good; temp4 is not to be counted
 // but this may change according to the text
@@ -358,18 +291,6 @@ Priority: 30
 ({Token.position == endpunct})
  -->
  :date.TempYear = {kind = "positive", rule = "TempYear1"}
-
-
-Rule: TempYear2
-Priority: 20
-// 1987
-
-(
- {Lookup.majorType == year}
-)
-:date -->
- :date.TempYear = {kind = "positive", rule = "TempYear2"}
-
 
 Rule: TempYear3
 Priority: 10

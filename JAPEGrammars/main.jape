@@ -5,12 +5,14 @@
 
 MultiPhase: ResumeParser
 Phases:
+MarkSectionHeading
 MarkSections
 MobileFinder
 PhoneFinder
 GenderFinder
 EmailFinder
 HukouFinder
+DateFinder
 
 /*ProfileSection
 DateRangeFinder

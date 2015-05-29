@@ -31,9 +31,9 @@
           <urlString>$relpath$testCorpora/</urlString>
         </storageUrl>
       </dsData>
-      <persistenceID class="string">testcorpora___1432632335215___3741</persistenceID>
+      <persistenceID class="string">testCorpora___1432802630851___6714</persistenceID>
       <resourceType>gate.corpora.SerialCorpusImpl</resourceType>
-      <resourceName>testcorpora</resourceName>
+      <resourceName>testCorpora</resourceName>
       <initParams class="gate.util.persistence.MapPersistence">
         <mapType>gate.util.SimpleFeatureMapImpl</mapType>
         <localMap/>
@@ -321,7 +321,7 @@
               </entry>
               <entry>
                 <string>wholeWordsOnly</string>
-                <boolean>true</boolean>
+                <boolean>false</boolean>
               </entry>
               <entry>
                 <string>document</string>
@@ -448,7 +448,7 @@
                   <localList>
                     <string>SpaceToken</string>
                   </localList>
-                  <collectionType>java.util.Arrays$ArrayList</collectionType>
+                  <collectionType>java.util.ArrayList</collectionType>
                 </gate.util.persistence.CollectionPersistence>
               </entry>
               <entry>
@@ -508,7 +508,7 @@
                     <string>Date</string>
                     <string>SpaceToken</string>
                   </localList>
-                  <collectionType>java.util.Arrays$ArrayList</collectionType>
+                  <collectionType>java.util.ArrayList</collectionType>
                 </gate.util.persistence.CollectionPersistence>
               </entry>
             </localMap>

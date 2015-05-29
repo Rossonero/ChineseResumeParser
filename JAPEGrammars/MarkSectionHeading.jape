@@ -1,0 +1,21 @@
+Imports: { 
+import static gate.Utils.*; 
+}
+
+Phase: MarkProfileSection
+Input: Lookup SpaceToken Token
+Options: control = appelt debug = false
+Rule: MarkSectionHeading
+{SpaceToken}
+(
+	{ Lookup.majorType == section_heading }
+):sh
+{SpaceToken}
+-->
+:sh{  
+  Annotation sh = shAnnots.iterator().next();  
+
+  FeatureMap fm = Factory.newFeatureMap();
+  fm.put("kind", sh.getFeatures().get("minorType"));
+  outputAS.add(shAnnots.firstNode(), shAnnots.lastNode(), "SectionHeading", fm);
+}

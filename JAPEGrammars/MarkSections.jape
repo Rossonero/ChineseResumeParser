@@ -3,49 +3,43 @@ import static gate.Utils.*;
 }
 
 Phase: MarkProfileSection
-Input: Lookup
+Input: SectionHeading
 Options: control = once debug = false
 Rule: MarkSections
 (
-	{ Lookup.majorType == section_heading }
+	{SectionHeading}
 )
 -->
 {
 	 try{
 
-	 	FeatureMap shFeature = Factory.newFeatureMap();
-		shFeature.put("majorType", "section_heading");
-
-	 	AnnotationSet section_headingAnnots = inputAS.get("Lookup", shFeature);  
+	 	AnnotationSet section_headingAnnots = inputAS.get("SectionHeading");  
 
 	    List<Annotation> sec_heads = section_headingAnnots.inDocumentOrder();  
 
 		FeatureMap profileHeadingFeature = Factory.newFeatureMap();
-		profileHeadingFeature.put("majorType", "section_heading");
-		profileHeadingFeature.put("minorType", "profile");
+		profileHeadingFeature.put("kind", "profile");
 
 		Long startOffset,  endOffset = sec_heads.get(0).getStartNode().getOffset(); ;
 		int index = 0;
 
-		if( section_headingAnnots.get("Lookup", profileHeadingFeature).size() == 0){	
+		if( section_headingAnnots.get("SectionHeading", profileHeadingFeature).size() == 0){	
 
 			startOffset = new Long(0);
-			FeatureMap profileSecFeature = Factory.newFeatureMap();
-		    profileSecFeature.put("kind", "profile");
 			
-			outputAS.add(startOffset, endOffset, "Section", profileSecFeature);
+			outputAS.add(startOffset, endOffset, "Section", profileHeadingFeature);
 		};  
 
 	    for (int i = 0; i < sec_heads.size() - 1; i++) {  
 	    	FeatureMap feature = Factory.newFeatureMap();
-			feature.put("kind", sec_heads.get(i).getFeatures().get("minorType"));
+			feature.put("kind", sec_heads.get(i).getFeatures().get("kind"));
 	    	startOffset = endOffset;
 	    	endOffset = sec_heads.get(i + 1).getStartNode().getOffset();
 	    	outputAS.add(startOffset, endOffset, "Section", feature);
 		}
 
 	    FeatureMap finalFeature = Factory.newFeatureMap();
-		finalFeature.put("kind", sec_heads.get(sec_heads.size() - 1).getFeatures().get("minorType"));
+		finalFeature.put("kind", sec_heads.get(sec_heads.size() - 1).getFeatures().get("kind"));
 
 		outputAS.add(endOffset, doc.getContent().size(), "Section", finalFeature);
 		}

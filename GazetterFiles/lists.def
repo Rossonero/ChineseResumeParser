@@ -20,7 +20,7 @@ hukou.lst:hukou
 city.lst:city:::LOCATION
 province.lst:province:::LOCATION
 area.lst:area:::LOCATION
-year.lst:year
+year_cn.lst:date:year_cn
 month.lst:date:month
+year_number.lst:date:year_number
 date.lst:date:ordinal
-date_unit.lst:date_unit

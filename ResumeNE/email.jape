@@ -17,7 +17,6 @@ Phase:	Email
 Input:  Token Lookup SpaceToken 
 Options: control = appelt
 
-
 // Email rules
 
 Rule:Emailaddress1
