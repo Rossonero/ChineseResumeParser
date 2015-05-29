@@ -2,11 +2,31 @@ Phase: DateFinder
 Input: Lookup Token
 Options: control = appelt debug = false
 
+
+Macro: YEAR 
+(
+	{Lookup.minorType == "year"}|
+    {Lookup.minorType == "year_number"}|
+	{Token.category == "NT", Token.string ==~ ".{1,4}年"}
+ )
+
+Macro: MONTH
+(
+	{Lookup.minorType == "month"}|
+	{Token.category == "NT", Token.string ==~ ".{1,2}月"}
+ )
+
+Macro: DATE 
+(
+	{Lookup.minorType == "ordinal"}|
+	{Token.category == "NT", Token.String ==~ ".{1,2}日"}
+ )
+
 Rule: YearMonthDate
 (	
-	{Lookup.minorType == year}
-	{Lookup.minorType == month}
-	{Lookup.minorType == date}
+ YEAR
+ MONTH
+ DATE
 )
 :DateLookup
 -->
@@ -14,18 +34,20 @@ Rule: YearMonthDate
 
 Rule: YearMonth
 (	
-	{Lookup.minorType == year}
-	{Lookup.minorType == month}
+ YEAR
+ MONTH
 )
 :DateLookup
 -->
 :DateLookup.Date = { kind = yearmonth}
 
+
+
 Rule: DateMonthYear
 (	
-	{Lookup.minorType == date}
-	{Lookup.minorType == month}
-	{Lookup.minorType == year}
+  DATE
+  MONTH
+  YEAR
 )
 :DateLookup
 -->
@@ -33,8 +55,8 @@ Rule: DateMonthYear
 
 Rule: MonthYear
 (	
-	{Lookup.minorType == month}
-	{Lookup.minorType == year}
+	MONTH
+	YEAR
 )
 :DateLookup
 -->
@@ -42,8 +64,17 @@ Rule: MonthYear
 
 Rule: YearOnly
 (	
-	{Lookup.minorType == year}
+	YEAR
 )
 :DateLookup
 -->
 :DateLookup.Date = { kind = year}
+
+
+Rule: YearOnly
+(	
+	MONTH
+)
+:DateLookup
+-->
+:DateLookup.Date = { kind = month}
