@@ -1,9 +1,45 @@
 Phase: NameFinder
-Input: PERSON Lookup
+Input: Token SpaceToken PERSON SURNAME Lookup  Section GENDER MOBILE CIVIL_STATE BIRTHDAY EMAIL HUKOU POLITICAL_STATUS DEGREE
 Options: control = appelt debug = false
-Rule: NameRule
-Priority 50
-({PERSON})
-:person
+
+MACRO: ONLYSURNAME
+(
+  {SURNAME within {Section.kind == profile}}
+  ({Token.category !~ "(PU|NT|CD)"})[1,2]
+)
+
+Rule: StrongNameRule
+Priority:200
+{Token.string =~ "(名字|姓名)"}
+({Token.category == PU} | {SpaceToken})[0,2]
+(
+  {PERSON} | ONLYSURNAME
+)
+:nameLookup
+{SpaceToken}
 -->
-person: = {}
+:nameLookup.NAME = { kind = name, conf = strong}
+
+Rule: NameNextToOthersRule
+Priority:150
+{SpaceToken.kind == control}
+(
+  {PERSON} | ONLYSURNAME
+)
+:nameLookup
+({Token} | {SpaceToken})[0,2]
+({GENDER} | {MOBILE} | {CIVIL_STATE} | {BIRTHDAY} | {EMAIL} | {HUKOU} | {POLITICAL_STATUS})
+-->
+:nameLookup.NAME = { kind = name, conf = nexttootherfeatures}
+
+Rule: NormalNameRule
+Priority:50
+({Token, !PERSON, !GENDER, !MOBILE, !BIRTHDAY, !EMAIL, !HUKOU, !POLITICAL_STATUS, !DEGREE} | {SpaceToken})[10]
+{SpaceToken.kind == control}
+(
+   ONLYSURNAME
+)
+:nameLookup
+{SpaceToken.kind == control}
+-->
+:nameLookup.NAME = { kind = name, conf = normal}

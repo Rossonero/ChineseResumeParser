@@ -1,0 +1,36 @@
+Phase: BirthdayFinder
+Input: Token Lookup SpaceToken
+Options: control = appelt debug = false
+
+Rule: BirthdayRule1
+Priority: 100
+({Token.string == "年龄"} | {Token.string == "生日"})
+  ({Token.category == PU})?
+  ({SpaceToken})?
+(
+  (({Token.category == NT})[1,3] | {Token.category == CD})
+)
+:bdLookup
+-->
+:bdLookup.BIRTHDAY = {conf = strong}
+
+
+Rule: BirthdayRule2
+Priority:80
+(
+  {Token.category == CD}
+  {Token.string == "岁", Token.category == M}
+)
+:bdLookup
+-->
+:bdLookup.BIRTHDAY = {conf = strong2}
+
+Rule: BirthdayRule3
+Priority:80
+ (
+ 	({Token.category == NT})[1,3]
+ )
+:bdLookup
+ {Token.string == "生"}
+-->
+:bdLookup.BIRTHDAY = {conf = strong3}

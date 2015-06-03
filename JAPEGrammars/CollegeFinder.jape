@@ -1,0 +1,14 @@
+Phase: CollegeFinder
+Input: Token COLLEGE SpaceToken
+Options: control = appelt debug = false
+
+Rule: CollegeRule1
+Priority: 100
+{SpaceToken}
+(
+  ({Token.category !=~ "(PU|NT|CD)",Token notWithin COLLEGE})[1,10]
+  ({Token.string == "大学",Token notWithin COLLEGE} | {Token.string == "学院",Token notWithin COLLEGE})
+)
+:collegeLookup
+-->
+:collegeLookup.College = {}

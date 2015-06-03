@@ -1,0 +1,14 @@
+Phase: DegreeFinder
+Input: Token Lookup
+Options: control = appelt debug = false
+
+Rule: DegreeRule1
+Priority: 100
+({Token.string == "学历"})
+({Token.category == PU})?
+(
+  {Lookup.majorType == degree}
+)
+:degreeLookup
+-->
+:degreeLookup.DEGREE = {conf = strong}

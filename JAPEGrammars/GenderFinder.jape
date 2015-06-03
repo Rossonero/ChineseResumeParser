@@ -1,12 +1,12 @@
 Phase: GenderFinder
-Input: Token Lookup SpaceToken
+Input: Token Gender SpaceToken
 Options: control = appelt debug = false
 
 Rule:StrongGenderRule
 Priority:100
 {Token.string == "性别"}
-({!Token.category =~ "(NN|NR|NT)"})[1, 2]
-({Lookup.majorType == "gender"}):genderLookup
+({!Token.category =~ "(NN|NR|NT)"} | {SpaceToken})[0, 2]
+({Gender}):genderLookup
 -->
 :genderLookup{
 	try{
@@ -15,7 +15,7 @@ Priority:100
 		FeatureMap gfeature = Factory.newFeatureMap();
 		gfeature.put("gender", gender);
 		gfeature.put("rule", "strong");
-		outputAS.add(lookupInstance.getStartNode().getOffset(), lookupInstance.getEndNode().getOffset(), "Gender", gfeature);
+		outputAS.add(lookupInstance.getStartNode().getOffset(), lookupInstance.getEndNode().getOffset(), "GENDER", gfeature);
 	}
 	catch(InvalidOffsetException e)
 	{}
@@ -25,7 +25,7 @@ Rule: NormalGenderRule
 Priority:50
 ({Token.category == "PU"} | {SpaceToken})
 (
- {Lookup.majorType == "gender"}
+ {Gender}
 ):genderLookup
 ({Token.category == "PU"} | {SpaceToken})
 -->
@@ -36,7 +36,7 @@ Priority:50
 		FeatureMap gfeature = Factory.newFeatureMap();
 		gfeature.put("gender", gender);gfeature.put("gender", gender);
 			gfeature.put("rule", "normal");
-		outputAS.add(lookupInstance.getStartNode().getOffset(), lookupInstance.getEndNode().getOffset(), "Gender", gfeature);
+		outputAS.add(lookupInstance.getStartNode().getOffset(), lookupInstance.getEndNode().getOffset(), "GENDER", gfeature);
 	}
 	catch(InvalidOffsetException e)
 	{}

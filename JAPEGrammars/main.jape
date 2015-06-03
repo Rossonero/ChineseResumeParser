@@ -13,10 +13,14 @@ GenderFinder
 EmailFinder
 HukouFinder
 DateFinder
+BirthdayFinder
+DegreeFinder
+CollegeFinder
+DateRangeFinder
+NameFinder
 
 /*ProfileSection
 DateRangeFinder
-NameFinder
 AddressFinder
 URLFinder
 TitleFinder

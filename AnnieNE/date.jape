@@ -47,16 +47,13 @@ Macro: MONTH
 (MONTH_NAME | DAY_MONTH_NUM)
 
 Macro: SLASH
-  ({Token.string == "/"})
+  ({Token.string == "/"})[1,2]
   
 Macro: DASH
-  {Token.string == "-"}
+  ({Token.string == "-"})[1,2]
 
 Macro: DOT
-  {Token.string == "."}
-
-Macro: OF
-  {Token.string == "of"}
+  ({Token.string == "."})[1,2]
 
 Macro: YEAR
 (        
@@ -164,7 +161,7 @@ Rule: DateNameSpan1
 
 (
  NUM_OR_ORDINAL
- {Token.string == "-"}
+ DASH
  (NUM_OR_ORDINAL MONTH_NAME ((COMMA)?  YEAR)?)
 )
 :date
@@ -177,7 +174,7 @@ Rule: DateNameSpan2
 (MONTH_NAME
 
  NUM_OR_ORDINAL 
- {Token.string == "-"}
+ DASH
  (NUM_OR_ORDINAL ((COMMA)?  YEAR)?)
 )
 :date
@@ -240,9 +237,7 @@ Rule: YearSpan2
 
 (
  (FOUR_DIGIT)
- ({Token.string == "/"}|
-  {Token.string == "-"}|
-  {Token.string == "."})
+ (SLASH|DASH|DOT)
  (FOUR_DIGIT|TWO_DIGIT | ONE_DIGIT)
 )
 :date -->
@@ -311,5 +306,5 @@ Rule: YearWords
  )?
  {Lookup.majorType == number}
 )
- :date -->
+:date -->
  :date.TempYear = {kind = "positive", rule = "YearWords"}

@@ -2,18 +2,16 @@ Phase: DateFinder
 Input: Lookup Token
 Options: control = appelt debug = false
 
-
-Macro: YEAR 
+Macro: YEAR
 (
 	{Lookup.minorType == "year"}|
-    {Lookup.minorType == "year_number"}|
-	{Token.category == "NT", Token.string ==~ ".{1,4}年"}
+	{Token.category == "NT", Token.string ==~ "(\\d{4}|\\d{2})年"}
  )
 
 Macro: MONTH
 (
 	{Lookup.minorType == "month"}|
-	{Token.category == "NT", Token.string ==~ ".{1,2}月"}
+	{Token.category == "NT", Token.string ==~ "(0?[1-9]|11|12|[一二三四五六七八九十]|十一|十二)月"}
  )
 
 Macro: DATE 
@@ -21,6 +19,11 @@ Macro: DATE
 	{Lookup.minorType == "ordinal"}|
 	{Token.category == "NT", Token.String ==~ ".{1,2}日"}
  )
+
+Macro: NOW
+(
+	{Token.string == "至今"} | {Token.string == "今"}
+)
 
 Rule: YearMonthDate
 (	
@@ -40,8 +43,6 @@ Rule: YearMonth
 :DateLookup
 -->
 :DateLookup.Date = { kind = yearmonth}
-
-
 
 Rule: DateMonthYear
 (	
@@ -70,11 +71,10 @@ Rule: YearOnly
 -->
 :DateLookup.Date = { kind = year}
 
-
-Rule: YearOnly
+Rule: Now
 (	
-	MONTH
+	NOW
 )
 :DateLookup
 -->
-:DateLookup.Date = { kind = month}
+:DateLookup.Date = { kind = now}

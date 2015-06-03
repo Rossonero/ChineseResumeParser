@@ -1,10 +1,31 @@
 Phase: EmailFinder
-Input: Token
+Input: Token Lookup Address
 Options: control = appelt debug = false
-Rule: EmailRule
+
+Rule: StrongEmailRule
+Priority:100
+{Lookup.majorType == email}
+({Token.category == PU})?
+(
+  ({Token})?
+  ({Address.kind == email} | {Token.string =~ "[^@]++@.*+"})
+)
+:emailLookup
+-->
+:emailLookup.EMAIL = { kind = email, conf = strong}
+
+Rule: EmailRuleByEnglishTokenizer
+Priority: 80
+({Address.kind == email, Address within {Section.kind == profile}})
+:emailLookup
+-->
+:emailLookup.EMAIL = {kind = email, conf = etnormal}
+
+/*Rule: EmailRule
+Priority:50
 (
  {Token.category =~ "(URL|NR)", Token.string =~ "^[_A-Za-z0-9-]++(\\.[_A-Za-z0-9-]++)*+@[A-Za-z0-9]++(\\.[A-Za-z0-9]++)*(\\.[A-Za-z]++)$" }
 )
 :emailLookup
 -->
-:emailLookup.EMAIL = { kind = email}
+:emailLookup.EMAIL = { kind = email, conf = normal}*/
