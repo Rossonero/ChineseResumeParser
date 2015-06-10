@@ -5,7 +5,7 @@ Options: control = first
 Rule: DateRange
 (
 {Date}
-({Token.category =~ "(PU|NT|CD)", Token.string !~ "[,，]"})[0,10]
+({Token.category =~ "(PU|NT|CD)", Token.string !~ "[,，]"} | {Token.string =~ "(至|到)"})[0,10]
 {Date}
 ):dr
 -->

@@ -1,10 +1,10 @@
 Phase: DegreeFinder
-Input: Token Lookup
+Input: Token Lookup SpaceToken
 Options: control = appelt debug = false
 
 Rule: DegreeRule1
 Priority: 100
-({Token.string == "学历"})
+({Token.string == "学历"} | {Lookup.majorType == degree})
 ({Token.category == PU})?
 (
   {Lookup.majorType == degree}
@@ -12,3 +12,23 @@ Priority: 100
 :degreeLookup
 -->
 :degreeLookup.DEGREE = {conf = strong}
+
+Rule: DegreeRule2
+Priority: 50
+{SpaceToken}
+(
+  {Lookup.majorType == degree}
+)
+:degreeLookup
+{SpaceToken}
+-->
+:degreeLookup.DEGREE = {conf = normal}
+
+Rule: DegreeRule3
+Priority: 20
+(
+  {Lookup.majorType == degree}
+)
+:degreeLookup
+-->
+:degreeLookup.DEGREE = {conf = weak}

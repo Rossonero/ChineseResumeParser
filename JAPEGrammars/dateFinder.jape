@@ -6,19 +6,19 @@ Macro: YEAR
 (
 	{Lookup.minorType == "year"}|
 	{Token.category == "NT", Token.string ==~ "(\\d{4}|\\d{2})年"}
- )
+)
 
 Macro: MONTH
 (
 	{Lookup.minorType == "month"}|
 	{Token.category == "NT", Token.string ==~ "(0?[1-9]|11|12|[一二三四五六七八九十]|十一|十二)月"}
- )
+)
 
 Macro: DATE 
 (
 	{Lookup.minorType == "ordinal"}|
 	{Token.category == "NT", Token.String ==~ ".{1,2}日"}
- )
+)
 
 Macro: NOW
 (
@@ -27,9 +27,9 @@ Macro: NOW
 
 Rule: YearMonthDate
 (	
- YEAR
- MONTH
- DATE
+  YEAR
+  MONTH
+  DATE
 )
 :DateLookup
 -->
@@ -37,8 +37,8 @@ Rule: YearMonthDate
 
 Rule: YearMonth
 (	
- YEAR
- MONTH
+  YEAR
+  MONTH
 )
 :DateLookup
 -->
@@ -56,8 +56,8 @@ Rule: DateMonthYear
 
 Rule: MonthYear
 (	
-	MONTH
-	YEAR
+  MONTH
+  YEAR
 )
 :DateLookup
 -->
@@ -65,7 +65,7 @@ Rule: MonthYear
 
 Rule: YearOnly
 (	
-	YEAR
+  YEAR
 )
 :DateLookup
 -->
@@ -73,7 +73,7 @@ Rule: YearOnly
 
 Rule: Now
 (	
-	NOW
+  NOW
 )
 :DateLookup
 -->

@@ -1,0 +1,14 @@
+Phase: WeightFinder
+Input: Token Section
+Options: control = appelt debug = false
+
+Rule: WeightRule1
+Priority: 100
+({Token.string == "体重", Token within {Section.kind == profile}})
+({Token.category == PU})?
+(
+  {Token}
+)
+:WeightLookup
+-->
+:WeightLookup.WEIGHT= {conf = strong}

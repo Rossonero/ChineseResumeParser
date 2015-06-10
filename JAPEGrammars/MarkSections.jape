@@ -3,30 +3,29 @@ import static gate.Utils.*;
 }
 
 Phase: MarkProfileSection
-Input: SectionHeading
+Input: Token
 Options: control = once debug = false
 Rule: MarkSections
 (
-	{SectionHeading}
+	{Token}
 )
 -->
 {
-	 try{
+	try{
 
-	 	AnnotationSet section_headingAnnots = inputAS.get("SectionHeading");  
+		AnnotationSet section_headingAnnots = inputAS.get("SectionHeading");
+		System.out.println("sec");
 
-	    List<Annotation> sec_heads = section_headingAnnots.inDocumentOrder();  
+	    List<Annotation> sec_heads = section_headingAnnots.inDocumentOrder();
 
 		FeatureMap profileHeadingFeature = Factory.newFeatureMap();
 		profileHeadingFeature.put("kind", "profile");
 
-		Long startOffset,  endOffset = sec_heads.get(0).getStartNode().getOffset(); ;
+		Long startOffset,  endOffset = sec_heads.get(0).getStartNode().getOffset();
 		int index = 0;
 
 		if( section_headingAnnots.get("SectionHeading", profileHeadingFeature).size() == 0){	
-
 			startOffset = new Long(0);
-			
 			outputAS.add(startOffset, endOffset, "Section", profileHeadingFeature);
 		};  
 
@@ -38,7 +37,7 @@ Rule: MarkSections
 	    	outputAS.add(startOffset, endOffset, "Section", feature);
 		}
 
-	    FeatureMap finalFeature = Factory.newFeatureMap();
+		FeatureMap finalFeature = Factory.newFeatureMap();
 		finalFeature.put("kind", sec_heads.get(sec_heads.size() - 1).getFeatures().get("kind"));
 
 		outputAS.add(endOffset, doc.getContent().size(), "Section", finalFeature);

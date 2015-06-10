@@ -16,7 +16,7 @@ Priority:100
 
 Rule: EmailRuleByEnglishTokenizer
 Priority: 80
-({Address.kind == email, Address within {Section.kind == profile}})
+({Address.kind == email})
 :emailLookup
 -->
 :emailLookup.EMAIL = {kind = email, conf = etnormal}

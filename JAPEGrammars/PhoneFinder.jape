@@ -1,23 +1,25 @@
 Phase: TelePhoneFinder
-Input: Lookup Token Phone
+Input: Lookup Token MOBILE Section
 Options: control = appelt debug = false
 
 Rule: StrongTelePhoneRuleBefore
 Priority:100
-({Lookup.minorType == telephone})
+(({Lookup.minorType == telephone, Lookup within {Section.kind == profile}})
 ({Token})?
 (
- {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !Phone.kind == MOBILE}
-):telePhoneLookup
+ {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !MOBILE}
+):telePhoneLookup):section
 -->
-:telePhoneLookup.PHONE = {kind = TelePhone, conf = strong}
+:telePhoneLookup.PHONE = {kind = TelePhone, conf = strong},
+:section.Section = {kind = telephone}
 
 Rule: NormalTelePhoneRule
 Priority:50
+({Token within {Section.kind == profile}, !Token.string =~ "(QQ|qq|id|ID|Id)"})
 ({!Token.string =~ "(QQ|qq|id|ID|Id)"})
-({!Token.string =~ "(QQ|qq|id|ID|Id)"})
-(
- {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !Phone.kind == MOBILE}
-):telePhoneLookup
+((
+ {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !MOBILE}
+):telePhoneLookup):section
 -->
-:telePhoneLookup.PHONE = {kind = TelePhone, conf = normal}
+:telePhoneLookup.PHONE = {kind = TelePhone, conf = normal},
+:section.Section = {kind = telephone}

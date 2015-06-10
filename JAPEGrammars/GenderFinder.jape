@@ -4,10 +4,11 @@ Options: control = appelt debug = false
 
 Rule:StrongGenderRule
 Priority:100
-{Token.string == "性别"}
+({Token.string == "性别"}
 ({!Token.category =~ "(NN|NR|NT)"} | {SpaceToken})[0, 2]
-({Gender}):genderLookup
+({Gender}):genderLookup):section
 -->
+:section.Section = {kind = gender},
 :genderLookup{
 	try{
 		Annotation lookupInstance = genderLookupAnnots.iterator().next();
@@ -23,12 +24,13 @@ Priority:100
 
 Rule: NormalGenderRule
 Priority:50
-({Token.category == "PU"} | {SpaceToken})
+(({Token.category == "PU"} | {SpaceToken})
 (
  {Gender}
-):genderLookup
+):genderLookup):section
 ({Token.category == "PU"} | {SpaceToken})
 -->
+:section.Section = {kind = gender},
 :genderLookup{
 	try{
 		Annotation lookupInstance = genderLookupAnnots.iterator().next();

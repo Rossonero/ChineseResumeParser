@@ -6,8 +6,8 @@ surname.lst:surname:::SURNAME
 degree.lst:degree
 gender_male.lst:gender:male::Gender
 gender_female.lst:gender:female::Gender
-mobile_identifier.lst:mobile_title
-phone_identifier.lst:phone:telephone
+mobile_identifier.lst:mobile_id
+phone_identifier.lst:phone_id
 colleges_moe.lst:colleges:moe::COLLEGE
 colleges_adult.lst:colleges:adult::COLLEGE
 colleges_independent.lst:colleges:independent::COLLEGE
@@ -17,9 +17,9 @@ colleges_userdefined.lst:colleges:userdefined::COLLEGE
 major_moe.lst:major:moe::Major
 major_userdefined.lst :major:userdefined::Major
 hukou.lst:hukou
-city.lst:city:::LOCATION
-province.lst:province:::LOCATION
-area.lst:area:::LOCATION
+city.lst:city:::LOC
+province.lst:province:::LOC
+area.lst:area:::LOC
 year_cn.lst:date:year_cn
 month.lst:date:month
 year_number.lst:date:year_number
@@ -27,3 +27,6 @@ date.lst:date:ordinal
 civil_state.lst:civil_state:::CIVIL_STATE
 political_status.lst:political_status:::POLITICAL_STATUS
 email_identifier.lst:email
+training_header.lst:section_heading:training
+residency.lst:residency
+self_accessment_identifier.lst:self_accessment

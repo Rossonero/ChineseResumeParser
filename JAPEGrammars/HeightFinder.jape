@@ -1,0 +1,14 @@
+Phase: HeightFinder
+Input: Token Section
+Options: control = appelt debug = false
+
+Rule: HeightRule1
+Priority: 100
+({Token.string == "身高", Token within {Section.kind == profile}})
+({Token.category == PU})?
+(
+  {Token}
+)
+:heightLookup
+-->
+:heightLookup.HEIGHT= {conf = strong}

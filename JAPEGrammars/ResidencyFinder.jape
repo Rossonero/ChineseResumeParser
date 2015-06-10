@@ -1,16 +1,16 @@
-Phase: HukouFinder
+Phase: RedidencyFinder
 Input: Token Lookup SpaceToken LOC GPE
 Options: control = appelt debug = false
 
-Rule:StrongHukouRule
+Rule:StrongRedidencyRule
 Priority:100
-({Lookup.majorType == "hukou"} | {Token.string == "户口"} | {Token.string =~ "户籍"})
+({Lookup.majorType == "redidency"} | {Token.string == "居住地"} | {Token.string =~ "所在地"})
 ({!Token.category =~ "(NN|NR|NT)"})[0, 2]
 {SpaceToken}
 (({Token} | {LOC} | {GPE})
   {SpaceToken}
   (({LOC} | {GPE})
   {SpaceToken})[0, 5]
-):hukouLookup
+):redidencyLookup
 -->
-:hukouLookup.HUKOU = {rule = strong}
+:redidencyLookup.RESIDENCY = {rule = strong}
