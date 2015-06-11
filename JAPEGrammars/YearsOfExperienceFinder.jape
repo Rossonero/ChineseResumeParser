@@ -1,0 +1,32 @@
+Phase: YoeFinder
+Input: Token SpaceToken YrOExp Daterange
+Options: control = appelt debug = false
+
+Rule:StrongYoeAfterRule
+(
+  {YrOExp}
+  ({SpaceToken})[0,2]
+  (
+    (({Token.category == CD, !Daterange}
+      {Token.category == M, Token.string != "岁"}) | 
+      {Token.category == NT, !Daterange})
+  ({Token})[0, 3]
+  ):yoeLookup
+  {SpaceToken.kind == control}
+):section
+-->
+:yoeLookup.YEARS_OF_EXPERIENCE = {rule = after},
+:section.Section = {kind = yoe,rule = after}
+
+Rule:StrongYoeBeforeRule
+(
+	(
+    (({Token.category == CD}
+      {Token.category == M}) | 
+      {Token.category == NT})
+    {YrOExp}
+  ):yoeLookup
+):section
+-->
+:yoeLookup.YEARS_OF_EXPERIENCE = {rule = before},
+:section.Section = {kind = yoe,rule = before}

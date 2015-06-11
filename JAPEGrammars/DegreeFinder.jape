@@ -4,14 +4,19 @@ Options: control = appelt debug = false
 
 Rule: DegreeRule1
 Priority: 100
-({Token.string == "学历"} | {Lookup.majorType == degree})
-({Token.category == PU})?
+{SpaceToken}
 (
-  {Lookup.majorType == degree}
-)
-:degreeLookup
+  ({Token.string == "学历"} | {Lookup.majorType == degree})
+  ({Token.category == PU})?
+  ({SpaceToken})[0,2]
+  (
+    {Lookup.majorType == degree}
+  ):degreeLookup
+):section
+{SpaceToken}
 -->
-:degreeLookup.DEGREE = {conf = strong}
+:degreeLookup.DEGREE = {conf = strong},
+:section.Section = {kind = degree}
 
 Rule: DegreeRule2
 Priority: 50
@@ -22,13 +27,17 @@ Priority: 50
 :degreeLookup
 {SpaceToken}
 -->
-:degreeLookup.DEGREE = {conf = normal}
+:degreeLookup.DEGREE = {conf = normal},
+:degreeLookup.Section = {kind = degree}
 
 Rule: DegreeRule3
 Priority: 20
+{SpaceToken}
 (
   {Lookup.majorType == degree}
 )
 :degreeLookup
+{SpaceToken}
 -->
-:degreeLookup.DEGREE = {conf = weak}
+:degreeLookup.DEGREE = {conf = weak},
+:degreeLookup.Section = {kind = degree}

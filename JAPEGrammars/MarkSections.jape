@@ -14,14 +14,13 @@ Rule: MarkSections
 	try{
 
 		AnnotationSet section_headingAnnots = inputAS.get("SectionHeading");
-		System.out.println("sec");
 
 	    List<Annotation> sec_heads = section_headingAnnots.inDocumentOrder();
 
 		FeatureMap profileHeadingFeature = Factory.newFeatureMap();
 		profileHeadingFeature.put("kind", "profile");
 
-		Long startOffset,  endOffset = sec_heads.get(0).getStartNode().getOffset();
+		Long startOffset, endOffset = sec_heads.get(0).getStartNode().getOffset();
 		int index = 0;
 
 		if( section_headingAnnots.get("SectionHeading", profileHeadingFeature).size() == 0){	

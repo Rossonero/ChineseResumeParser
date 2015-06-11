@@ -5,6 +5,7 @@ import static gate.Utils.*;
 Phase: MarkProfileSection
 Input: Lookup SpaceToken Token
 Options: control = appelt debug = false
+
 Rule: MarkSectionHeading
 {SpaceToken}
 (
@@ -19,3 +20,4 @@ Rule: MarkSectionHeading
   fm.put("kind", sh.getFeatures().get("minorType"));
   outputAS.add(shAnnots.firstNode(), shAnnots.lastNode(), "SectionHeading", fm);
 }
+

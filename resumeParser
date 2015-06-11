@@ -217,14 +217,14 @@
             <mapType>gate.util.SimpleFeatureMapImpl</mapType>
             <localMap>
               <entry>
+                <string>encoding</string>
+                <string>UTF-8</string>
+              </entry>
+              <entry>
                 <string>tokeniserRulesURL</string>
                 <gate.util.persistence.PersistenceManager-URLHolder>
                   <urlString>$gatehome$plugins/ANNIE/resources/tokeniser/DefaultTokeniser.rules</urlString>
                 </gate.util.persistence.PersistenceManager-URLHolder>
-              </entry>
-              <entry>
-                <string>encoding</string>
-                <string>UTF-8</string>
               </entry>
               <entry>
                 <string>transducerGrammarURL</string>

@@ -1,14 +1,31 @@
 Phase: WeightFinder
-Input: Token Section
+Input: Token SpaceToken
 Options: control = appelt debug = false
 
 Rule: WeightRule1
 Priority: 100
-({Token.string == "体重", Token within {Section.kind == profile}})
-({Token.category == PU})?
 (
-  {Token}
-)
-:WeightLookup
+  ({Token.string == "体重"})
+  ({Token.category == PU})?
+  ({SpaceToken})[0,2]
+  (
+    {Token.string =~ "^\\d++(公斤|kg)?"}
+    ({Token.string =~ "(公斤|kg)"})?
+  ):weightLookup
+):section
 -->
-:WeightLookup.WEIGHT= {conf = strong}
+:weightLookup.WEIGHT= {conf = strong},
+:section.Section= {kind = weight}
+
+Rule: WeightRule2
+Priority: 50
+(
+  {SpaceToken}
+  (
+    {Token.string =~ "^\\d++(公斤|kg)"}
+  ):weightLookup
+):section
+  {SpaceToken}
+-->
+:weightLookup.WEIGHT= {conf = normal},
+:section.Section= {kind = weight}

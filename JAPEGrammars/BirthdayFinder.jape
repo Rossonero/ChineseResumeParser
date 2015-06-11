@@ -1,16 +1,18 @@
 Phase: BirthdayFinder
-Input: Token Lookup SpaceToken
+Input: Token Birthday SpaceToken
 Options: control = appelt debug = false
 
 Rule: BirthdayRuleS1
 Priority: 200
-(({Token.string == "年龄"} | {Token.string == "生日"} | {Token.string == "出生日期"})
-  ({Token.category == PU})?
-  ({SpaceToken})?
 (
-  (({Token.category == NT})[1,3] | {Token.category == CD})
-):bdLookup
-({Token.string == "岁"} | {Token.string == "生"})):section
+  ({Birthday})
+  ({Token.category == PU})?
+  ({SpaceToken})[0,2]
+  (
+    (({Token.category == NT})[1,3] | {Token.category == CD})
+    ({Token.string == "岁"} | {Token.string == "生"})?
+  ):bdLookup
+):section
 -->
 :bdLookup.BIRTHDAY = {conf = strong},
 :section.Section = {kind = birthday}
@@ -18,36 +20,31 @@ Priority: 200
 Rule: BirthdayRuleS2
 Priority:180
 {SpaceToken}
-((
+(
   {Token.category == CD}
+  {Token.string == "岁", Token.category == M}
 ):bdLookup
-{Token.string == "岁", Token.category == M}):section
-{SpaceToken}
 -->
 :bdLookup.BIRTHDAY = {conf = strong2},
-:section.Section = {kind = birthday}
+:bdLookup.Section = {kind = birthday}
 
 Rule: BirthdayRuleS3
 Priority:160
 {SpaceToken}
-((
-  ({Token.category == NT})[1,3]
+(
+ ({Token.category == NT})[1,3]
+ {Token.string == "生"}
 ):bdLookup
- {Token.string == "生"}):section
 {SpaceToken}
 -->
 :bdLookup.BIRTHDAY = {conf = strong3},
-:section.Section = {kind = birthday}
+:bdLookup.Section = {kind = birthday}
 
-Phase: BirthdayFinder
-Input: Token Lookup SpaceToken
-Options: control = appelt debug = false
-
-Rule: BirthdayRuleW1
+/*Rule: BirthdayRuleW1
 Priority: 100
 (({Token.string == "年龄"} | {Token.string == "生日"} | {Token.string == "出生日期"})
   ({Token.category == PU})?
-  ()?
+   ({SpaceToken})?
 (
   (({Token.category == NT})[1,3] | {Token.category == CD})
 ):bdLookup
@@ -58,24 +55,20 @@ Priority: 100
 
 Rule: BirthdayRuleW2
 Priority:80
-
 ((
   {Token.category == CD}
 ):bdLookup
 {Token.string == "岁", Token.category == M}):section
-
 -->
 :bdLookup.BIRTHDAY = {conf = weak2},
 :section.Section = {kind = birthday}
 
 Rule: BirthdayRuleW3
 Priority:60
-
 ((
   ({Token.category == NT})[1,3]
 ):bdLookup
  {Token.string == "生"}):section
-
 -->
 :bdLookup.BIRTHDAY = {conf = weak3},
-:section.Section = {kind = birthday}
+:section.Section = {kind = birthday}*/

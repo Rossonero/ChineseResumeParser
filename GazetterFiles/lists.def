@@ -16,7 +16,8 @@ colleges_hk.lst:colleges:hk::COLLEGE
 colleges_userdefined.lst:colleges:userdefined::COLLEGE
 major_moe.lst:major:moe::Major
 major_userdefined.lst :major:userdefined::Major
-hukou.lst:hukou
+hukou_identifier.lst:hukou:::Hukou
+jiguan_identifier.lst:jiguan:::Jiguan
 city.lst:city:::LOC
 province.lst:province:::LOC
 area.lst:area:::LOC
@@ -24,9 +25,13 @@ year_cn.lst:date:year_cn
 month.lst:date:month
 year_number.lst:date:year_number
 date.lst:date:ordinal
-civil_state.lst:civil_state:::CIVIL_STATE
-political_status.lst:political_status:::POLITICAL_STATUS
+civil_state.lst:civil_state:::Civil_State
+civil_state_identifier.lst:civil_state:::Civil_State_ID
+political_status.lst:political_status:::Political_Status
 email_identifier.lst:email
 training_header.lst:section_heading:training
 residency.lst:residency
 self_accessment_identifier.lst:self_accessment
+years_of_experience_identifier.lst:yr_o_exp:::YrOExp
+birthday_identifier.lst:birthday_id:::Birthday
+job_location_identifier.lst:job_id:::Job_Loc

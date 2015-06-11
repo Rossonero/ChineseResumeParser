@@ -1,0 +1,19 @@
+Phase: JiguanFinder
+Input: Token Jiguan SpaceToken LOC GPE
+Options: control = appelt debug = false
+
+Rule:StrongJiguanRule
+Priority:100
+(
+({Jiguan} | {Token.string == "籍贯"})
+({!Token.category =~ "(NN|NR|NT)"})[0, 2]
+({SpaceToken})[0,2]
+(({Token} | {LOC} | {GPE})[1,10]
+  ({SpaceToken})?
+  (({LOC} | {GPE})
+  {SpaceToken})[0, 5]
+):jiguanLookup
+):section
+-->
+:jiguanLookup.JIGUAN = {rule = strong},
+:section.Section = {kind = jiguan}

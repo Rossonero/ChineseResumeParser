@@ -3,10 +3,12 @@ Input: Date Token SpaceToken
 Options: control = first
 
 Rule: DateRange
+{SpaceToken}
 (
 {Date}
 ({Token.category =~ "(PU|NT|CD)", Token.string !~ "[,，]"} | {Token.string =~ "(至|到)"})[0,10]
 {Date}
 ):dr
+{SpaceToken}
 -->
 :dr.Daterange = {}

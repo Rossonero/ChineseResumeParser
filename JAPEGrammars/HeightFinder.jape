@@ -1,14 +1,31 @@
 Phase: HeightFinder
-Input: Token Section
+Input: Token SpaceToken
 Options: control = appelt debug = false
 
 Rule: HeightRule1
 Priority: 100
-({Token.string == "身高", Token within {Section.kind == profile}})
-({Token.category == PU})?
 (
-  {Token}
-)
-:heightLookup
+  ({Token.string == "身高"})
+  ({Token.category == PU})?
+  ({SpaceToken})[0,2]
+  (
+    {Token.category == CD, Token.string =~ "^\\d++(厘米|米|cm|m)?"}
+    ({Token.string =~ "(厘米|米|cm|m)"})?
+  ):heightLookup
+):section
 -->
-:heightLookup.HEIGHT= {conf = strong}
+:heightLookup.HEIGHT= {conf = strong},
+:section.Section= {kind = height,conf = strong}
+
+
+Rule: HeightRule2
+Priority: 50
+  {SpaceToken}
+  ((
+    {Token.string =~ "^\\d++(厘米|米|cm|m)"}
+  ):heightLookup
+):section
+  {SpaceToken}
+-->
+:heightLookup.HEIGHT= {conf = normal},
+:section.Section= {kind = height,conf = normal}
