@@ -1,5 +1,5 @@
 Phase: Civil_StateFinder
-Input: Token Civil_State_ID Civil_State SpaceToken LOC GPE
+Input: Token Civil_State_ID Civil_State SpaceToken
 Options: control = appelt debug = false
 
 Rule:StrongCivil_StateRule

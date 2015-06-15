@@ -1,14 +1,16 @@
 Phase: TelePhoneFinder
-Input: Lookup Token MOBILE Section
+Input: Phone_ID Token MOBILE Section
 Options: control = appelt debug = false
 
 Rule: StrongTelePhoneRuleBefore
 Priority:100
-(({Lookup.minorType == telephone})
-({Token})?
 (
- {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !MOBILE}
-):telePhoneLookup):section
+  {Phone_ID}
+  ({Token})?
+  (
+   {Token.category =~ "(CD|NT)", Token.string =~ "^((0?86)?\\W?)?(0?\\d{2,3}\\W?)?([2-9]\\d{6,7})$", !MOBILE}
+  ):telePhoneLookup
+):section
 -->
 :telePhoneLookup.PHONE = {kind = TelePhone, conf = strong},
 :section.Section = {kind = telephone}

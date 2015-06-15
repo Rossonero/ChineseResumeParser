@@ -1,19 +1,17 @@
 Phase: DegreeFinder
-Input: Token Lookup SpaceToken
+Input: Token Degree_ID Lookup SpaceToken
 Options: control = appelt debug = false
 
 Rule: DegreeRule1
 Priority: 100
-{SpaceToken}
 (
-  ({Token.string == "学历"} | {Lookup.majorType == degree})
+  {Degree_ID}
   ({Token.category == PU})?
   ({SpaceToken})[0,2]
   (
     {Lookup.majorType == degree}
   ):degreeLookup
 ):section
-{SpaceToken}
 -->
 :degreeLookup.DEGREE = {conf = strong},
 :section.Section = {kind = degree}

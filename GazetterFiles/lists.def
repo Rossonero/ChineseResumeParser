@@ -6,8 +6,8 @@ surname.lst:surname:::SURNAME
 degree.lst:degree
 gender_male.lst:gender:male::Gender
 gender_female.lst:gender:female::Gender
-mobile_identifier.lst:mobile_id
-phone_identifier.lst:phone_id
+mobile_identifier.lst::::Mobile_ID
+phone_identifier.lst::::Phone_ID
 colleges_moe.lst:colleges:moe::COLLEGE
 colleges_adult.lst:colleges:adult::COLLEGE
 colleges_independent.lst:colleges:independent::COLLEGE
@@ -35,3 +35,6 @@ self_accessment_identifier.lst:self_accessment
 years_of_experience_identifier.lst:yr_o_exp:::YrOExp
 birthday_identifier.lst:birthday_id:::Birthday
 job_location_identifier.lst:job_id:::Job_Loc
+degree_identifier.lst::::Degree_ID
+political_status_identifier.lst::::Political_Status_ID
+apply_position_identifier.lst::::Apply_Position_ID

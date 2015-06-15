@@ -6,6 +6,7 @@
 MultiPhase: ResumeParser
 Phases:
 
+ApplyPositionFinder
 BirthdayFinder
 CivilStateFinder
 DateFinder
@@ -17,8 +18,10 @@ HeightFinder
 HukouFinder
 JiguanFinder
 JobLocationFinder
+MiscFinder
 MobileFinder
 PhoneFinder
+Political_StatusFinder
 ResidencyFinder
 WeightFinder
 YearsOfExperienceFinder

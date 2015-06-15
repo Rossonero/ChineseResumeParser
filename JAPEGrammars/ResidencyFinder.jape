@@ -5,7 +5,7 @@ Options: control = appelt debug = false
 Rule:StrongResidencyRule
 Priority:100
 (
-({Lookup.majorType == "redidency"} | {Token.string == "居住地"} | {Token.string =~ "所在地"})
+({Lookup.majorType == "residency"})
 ({!Token.category =~ "(NN|NR|NT)"})[0, 2]
 ({SpaceToken})[0,2]
 (({Token} | {LOC} | {GPE})
