@@ -6,11 +6,10 @@ Rule:StrongApplyCompanyRule
 Priority:100
 (
   {Apply_Company_ID}
-  (({Token.category !~ "(NN|NR|NT)"})[0, 2]):test
+  (({Token.category !~ "(NN|NR|NT)"})[0, 2])
   ({SpaceToken})[0,2]
   ({Sentence}):applycompanyLookup
 ):section
 -->
-:test.App = {test=1},
 :applycompanyLookup.APPLY_COMPANY = {rule = strong},
 :section.Section = {kind = apply_company}

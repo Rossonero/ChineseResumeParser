@@ -9,10 +9,9 @@ Priority:100
 	({Token.category !~ "(NN|NR|NT)"})[0, 2]
 	({SpaceToken})[0,2]
 	(
-		({LOC} | {GPE})
-		({SpaceToken})?
-		(({Token}| {LOC} | {GPE})
-		{SpaceToken})[0, 5]
+		({LOC} | {GPE} | {Token.category == PU})[1,5]
+		({SpaceToken}
+		({Token}| {LOC} | {GPE}))[0,3]
 	):job_locLookup
 ):section
 -->

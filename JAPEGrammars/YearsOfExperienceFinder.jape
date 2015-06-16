@@ -44,7 +44,7 @@ Rule:StrongYoeBeforeRule
 {SpaceToken}
 	(
     (
-      ({Token.category == CD} | {Token.category == NT})
+      ({Token.category == CD} | {Token.category == NT} | {Token.string == "无"})
       ({Token.category == M})?
       ({Token.string == "以上"})?
       ({Token})[0,2]
@@ -55,3 +55,16 @@ Rule:StrongYoeBeforeRule
 -->
 :yoeLookup.YEARS_OF_EXPERIENCE = {rule = before},
 :section.Section = {kind = yoe,rule = before}
+
+Rule:JustGradRule
+{SpaceToken}
+(
+  (
+    {Token.string == "应届"}
+    ({Token.string == "毕业生"})?
+  ):yoeLookup
+):section
+{SpaceToken}
+-->
+:yoeLookup.YEARS_OF_EXPERIENCE = {rule = justgrad},
+:section.Section = {kind = yoe,rule = justgrad}
