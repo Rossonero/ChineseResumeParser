@@ -1,0 +1,18 @@
+Phase: Job_SalaryFinder
+Input: Token Career_Objective_Target_Salary_ID SpaceToken
+Options: control = appelt debug = false
+
+Rule:StrongJob_SalaryRule
+Priority:100
+(
+	{Career_Objective_Target_Salary_ID}
+	({SpaceToken})[0,2]
+	(
+	  ({Token.category == CD} | {Token.string == "面议"})
+	  ({Token})[0,5]
+	):job_salaryLookup
+):section
+{SpaceToken}
+-->
+:job_salaryLookup.CAREER_OBJECTIVE_TARGET_SALARY = {rule = strong},
+:section.Section = {kind = co_salary}

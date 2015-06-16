@@ -38,8 +38,8 @@ Priority:50
 		Annotation lookupInstance = genderLookupAnnots.iterator().next();
 		String gender = (String) lookupInstance.getFeatures().get("minorType");
 		FeatureMap gfeature = Factory.newFeatureMap();
-		gfeature.put("gender", gender);gfeature.put("gender", gender);
-			gfeature.put("rule", "normal");
+		gfeature.put("gender", gender);
+		gfeature.put("rule", "normal");
 		outputAS.add(lookupInstance.getStartNode().getOffset(), lookupInstance.getEndNode().getOffset(), "GENDER", gfeature);
 	}
 	catch(InvalidOffsetException e)

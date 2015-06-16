@@ -34,7 +34,10 @@ residency.lst:residency
 self_accessment_identifier.lst:self_accessment
 years_of_experience_identifier.lst:yr_o_exp:::YrOExp
 birthday_identifier.lst:birthday_id:::Birthday
-job_location_identifier.lst:job_id:::Job_Loc
 degree_identifier.lst::::Degree_ID
 political_status_identifier.lst::::Political_Status_ID
 apply_position_identifier.lst::::Apply_Position_ID
+apply_company_identifier.lst::::Apply_Company_ID
+career_objective_category_identifier.lst::::Career_Objective_Category_ID
+career_objective_location_identifier.lst::::Career_Objective_Location_ID
+career_objective_target_salary_identifier.lst::::Career_Objective_Target_Salary_ID

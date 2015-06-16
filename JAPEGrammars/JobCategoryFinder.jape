@@ -1,0 +1,20 @@
+Phase: Job_CatFinder
+Input: Token Career_Objective_Category_ID SpaceToken LOC GPE
+Options: control = appelt debug = false
+
+Rule:StrongJob_locRule
+Priority:100
+(
+	{Career_Objective_Category_ID}
+	({!Token.category =~ "(NN|NR|NT)"})[0, 2]
+	({SpaceToken})[0,2]
+	(
+		({Token} | {LOC} | {GPE})[1,10]
+		({SpaceToken})?
+		(({LOC} | {GPE})
+		{SpaceToken})[0, 5]
+	):job_catLookup
+):section
+-->
+:job_catLookup.CAREER_OBJECTIVE_JOB_CATEGORY = {rule = strong},
+:section.Section = {kind = co_category}

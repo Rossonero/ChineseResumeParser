@@ -14,11 +14,17 @@ Priority:100
 :civil_stateLookup.CIVIL_STATE = {rule = strong},
 :section.Section = {kind = civil_state}
 
+
+
+Phase: NormalCivil_StateFinder
+Input: Civil_State CIVIL_STATE SpaceToken
+Options: control = appelt
+
 Rule:NormalCivil_StateRule
 Priority:100
 (
   {SpaceToken}
-  ({Civil_State}):civil_stateLookup
+  ({Civil_State, !CIVIL_STATE}):civil_stateLookup
   {SpaceToken}
 ):section
 -->

@@ -40,6 +40,19 @@ Rule: GradTimeRule
 :gtLookup.GradTime= {conf = strong},
 :section.Section= {kind = gradtime,conf = strong}
 
+Rule: IDRule
+(
+  {Token.string == "证件"}
+  {Token.string == "号码"}
+  ({Token.category == PU})?
+  (
+    ({Token.category == CD})[1,3]
+  ):gtLookup
+):section
+-->
+:gtLookup.ID= {conf = strong},
+:section.Section= {kind = ID,conf = strong}
+
 Rule: QQRule
 (
   {Token.string == "QQ"}
@@ -51,4 +64,17 @@ Rule: QQRule
 -->
 :qqLookup.QQ= {conf = strong},
 :section.Section= {kind = qq,conf = strong}
+
+Rule: HealthRule
+(
+  {Token.string == "健康"}
+  {Token.string == "状况"}
+  ({Token.category == PU})?
+  (
+    {Token}
+  ):gtLookup
+):section
+-->
+:gtLookup.HEALTH= {conf = strong},
+:section.Section= {kind = heath,conf = strong}
 

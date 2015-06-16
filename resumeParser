@@ -31,9 +31,9 @@
           <urlString>$relpath$testCorpora/</urlString>
         </storageUrl>
       </dsData>
-      <persistenceID class="string">testCorpora___1432802630851___6714</persistenceID>
+      <persistenceID class="string">test___1434339989186___132</persistenceID>
       <resourceType>gate.corpora.SerialCorpusImpl</resourceType>
-      <resourceName>testCorpora</resourceName>
+      <resourceName>test</resourceName>
       <initParams class="gate.util.persistence.MapPersistence">
         <mapType>gate.util.SimpleFeatureMapImpl</mapType>
         <localMap/>
