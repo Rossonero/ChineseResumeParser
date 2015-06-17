@@ -1,13 +1,15 @@
 Phase: NameFinder
 Input:
-Options: control = appelt debug = true
+Options: control = once debug = true
 
 MACRO: BEGINWITHSURNAME
 (
-  (
-  	{SURNAME, Sentence@length < 5}
-  ) |
   {SURNAME, Token.category == NR, Token@length < 5}
+)
+
+MACRO: POSSIBLENAME
+(
+  {SURNAME, Sentence@length < 5, !PERSON, !NAME}
 )
 
 Rule: StrongNameRule
@@ -24,7 +26,7 @@ Priority:200
 :nameLookup.NAME = { kind = name, conf = strongest}
 
 Rule: StrongNameRule
-Priority:170
+Priority:150
 {SpaceToken}
 {Token.string =~ "(名字|姓名)"}
 ({Token.category == PU} | {SpaceToken})[0,2]
@@ -37,7 +39,7 @@ Priority:170
 :nameLookup.NAME = { kind = name, conf = strong}
 
 Rule: NameNextToOthersRule
-Priority:150
+Priority:100
 {SpaceToken.kind == control}
 (
   {PERSON} | BEGINWITHSURNAME
@@ -47,16 +49,47 @@ Priority:150
  {SpaceToken.kind == control})[0,1]
 ({GENDER} | {MOBILE} | {CIVIL_STATE} | {BIRTHDAY} | {EMAIL} | {HUKOU} | {POLITICAL_STATUS} | {YEARS_OF_EXPERIENCE})
 -->
-:nameLookup.NAME = { kind = name, conf = nexttootherfeatures}
+:nameLookup.NAME = { kind = name, conf = strong, rule = nexttootherfeatures}
 
-Rule: NormalNameRule
-Priority:50
+/*-------------------------------------------------------------------------*/
+Phase: PossibleNameNextToOthers
+Input:
+Options: control = once debug = true
+
+Rule: PossibleNameNextToOthers
+Priority:100
 
 {SpaceToken.kind == control}
 (
-   {SURNAME, Sentence@length < 5, !PERSON}
-)
-:nameLookup
+  POSSIBLENAME
+):nameLookup
 {SpaceToken.kind == control}
+({Sentence, !PERSON, !NAME}
+ {SpaceToken.kind == control})[0,1]
+({GENDER} | {MOBILE} | {CIVIL_STATE} | {BIRTHDAY} | {EMAIL} | {HUKOU} | {POLITICAL_STATUS} | {YEARS_OF_EXPERIENCE})
 -->
-:nameLookup.NAME = { kind = name, conf = normal}
+:nameLookup.NAME = { kind = name, conf = possible, rule = nexttootherfeatures}
+
+Phase: PossibleName2
+Input:
+Options: control = once debug = true
+
+Rule: HasName
+
+({NAME}):name
+-->
+{}
+
+Rule: PossibleNameFarFromOthers
+Priority:10
+
+{SpaceToken.kind == control}
+(
+  POSSIBLENAME
+):nameLookup
+{SpaceToken.kind == control}
+({Sentence, !PERSON, !NAME}
+ {SpaceToken.kind == control})[0,10]
+({GENDER} | {MOBILE} | {CIVIL_STATE} | {BIRTHDAY} | {EMAIL} | {HUKOU} | {POLITICAL_STATUS} | {YEARS_OF_EXPERIENCE})
+-->
+:nameLookup.NAME = { kind = name, conf = possible, rule = nexttootherfeatures}

@@ -1,5 +1,5 @@
 Phase: MISCFinder
-Input: Token GPE
+Input: Token GPE Current_Salary_ID Sentence
 Options: control = appelt debug = false
 
 Rule: NationRule
@@ -78,3 +78,18 @@ Rule: HealthRule
 :gtLookup.HEALTH= {conf = strong},
 :section.Section= {kind = heath,conf = strong}
 
+Rule: CurrentSalaryRule
+(
+  {Current_Salary_ID}
+  ({Token})[0,5]
+  ({SpaceToken})[0,2]
+  ({Token.string =~ "(月薪|年薪|时薪)"})?
+  ({SpaceToken})?
+  (
+    {Token.category =~ "(CD|NT)", Sentence}
+  ):current_salaryLookup
+):section
+-->
+
+:current_salaryLookup.CURRENT_SALARY = {},
+:section.Section = {kind = current_salary}

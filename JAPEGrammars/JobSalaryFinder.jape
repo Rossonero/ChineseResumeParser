@@ -1,18 +1,21 @@
 Phase: Job_SalaryFinder
-Input: Token Career_Objective_Target_Salary_ID SpaceToken
+Input: Token Career_Objective_Target_Salary_ID SpaceToken Sentence
 Options: control = appelt debug = false
 
 Rule:StrongJob_SalaryRule
 Priority:100
 (
 	{Career_Objective_Target_Salary_ID}
+	({Token})[0,5]
 	({SpaceToken})[0,2]
+	(({Token.string =~ "(月薪|年薪|时薪)"})?
+	({SpaceToken})?):t
 	(
-	  ({Token.category == CD} | {Token.string == "面议"})
-	  ({Token})[0,5]
+	  ({Token.category =~ "(CD|NT)", Sentence} | {Token.string == "面议", Sentence})
 	):job_salaryLookup
 ):section
 {SpaceToken}
 -->
+:t.t = {},
 :job_salaryLookup.CAREER_OBJECTIVE_TARGET_SALARY = {rule = strong},
 :section.Section = {kind = co_salary}
