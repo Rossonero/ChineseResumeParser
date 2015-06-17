@@ -489,10 +489,11 @@ Priority: 50
 //removes TempAddress annotation, gets the rule feature and adds a new Address annotation
 gate.AnnotationSet addressSet = (gate.AnnotationSet)bindings.get("address");
 gate.Annotation addressAnn = (gate.Annotation)addressSet.iterator().next();
+String kind = (String) addressAnn.getFeatures().get("kind");
 gate.FeatureMap features = Factory.newFeatureMap();
 features.putAll(addressAnn.getFeatures());
 features.put("ruleFinal", "PhoneFinal");
-features.put("kind", "phone");
+features.put("kind", kind);
 outputAS.add(addressSet.firstNode(), addressSet.lastNode(), "Address",
 features);
 outputAS.removeAll(addressSet);

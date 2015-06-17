@@ -11,7 +11,7 @@ Priority:100
  {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
 ):MobileLookup
 -->
-:MobileLookup.Phone = {kind = Mobile, conf = strong}
+:MobileLookup.Phone = {kind = mobile, conf = strong}
 
 Rule: StrongMobileRuleAfter
 Priority:80
@@ -23,7 +23,7 @@ Priority:80
 ({Token})?
 ({Lookup.minorType == Mobile})
 -->
-:MobileLookup.Phone = {kind = Mobile, conf = strong}
+:MobileLookup.Phone = {kind = mobile, conf = strong}
 
 Rule: StrongMobileRule86
 Priority:70
@@ -33,7 +33,7 @@ Priority:70
  {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
 ):MobileLookup
 -->
-:MobileLookup.Phone = {kind = Mobile, conf = strong}
+:MobileLookup.Phone = {kind = mobile, conf = strong}
 
 Rule: NormalMobileRule
 Priority: 50
@@ -43,4 +43,4 @@ Priority: 50
  {Token.kind == number, Token.length == 11, Token.string =~ "^(13|14|15|17|18)\\d{9}$"}
 ):MobileLookup
 -->
-:MobileLookup.Phone = {kind = Mobile, conf = normal}
+:MobileLookup.Phone = {kind = mobile, conf = normal}
