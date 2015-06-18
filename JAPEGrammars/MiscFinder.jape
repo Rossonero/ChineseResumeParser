@@ -14,13 +14,12 @@ Rule: NationRule
 :nationLookup.NATION= {conf = strong},
 :section.Section= {kind = nation,conf = strong}
 
-
 Rule: EthnicRule
 (
   {Token.string == "民族"}
   ({Token.category == PU})?
   (
-    {Token.string =~ "族$"}
+    {Token, Sentence}
   ):ethnicLookup
 ):section
 -->
@@ -80,16 +79,12 @@ Rule: HealthRule
 
 Rule: CurrentSalaryRule
 (
-  {Current_Salary_ID}
-  ({Token})[0,5]
-  ({SpaceToken})[0,2]
+  {Current_Salary_ID, Sentence}
   ({Token.string =~ "(月薪|年薪|时薪)"})?
-  ({SpaceToken})?
   (
     {Token.category =~ "(CD|NT)", Sentence}
   ):current_salaryLookup
 ):section
 -->
-
 :current_salaryLookup.CURRENT_SALARY = {},
 :section.Section = {kind = current_salary}

@@ -8,14 +8,13 @@ Priority:100
 	{Career_Objective_Target_Salary_ID}
 	({Token})[0,5]
 	({SpaceToken})[0,2]
-	(({Token.string =~ "(月薪|年薪|时薪)"})?
-	({SpaceToken})?):t
+	({Token.string =~ "(月薪|年薪|时薪)"})?
+	({SpaceToken})?
 	(
 	  ({Token.category =~ "(CD|NT)", Sentence} | {Token.string == "面议", Sentence})
 	):job_salaryLookup
 ):section
 {SpaceToken}
 -->
-:t.t = {},
 :job_salaryLookup.CAREER_OBJECTIVE_TARGET_SALARY = {rule = strong},
 :section.Section = {kind = co_salary}

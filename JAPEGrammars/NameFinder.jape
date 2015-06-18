@@ -15,28 +15,30 @@ MACRO: POSSIBLENAME
 Rule: StrongNameRule
 Priority:200
 {SpaceToken}
-{Token.string =~ "(名字|姓名)"}
+({Token.string =~ "(名字|姓名)"}
 ({Token.category == PU} | {SpaceToken})[0,2]
 (
   {PERSON} | BEGINWITHSURNAME
-)
-:nameLookup
+):nameLookup
+):section
 {SpaceToken}
 -->
-:nameLookup.NAME = { kind = name, conf = strongest}
+:nameLookup.NAME = { kind = name, conf = strongest},
+:section.Section = {kind = name}
 
 Rule: StrongNameRule
 Priority:150
 {SpaceToken}
-{Token.string =~ "(名字|姓名)"}
+({Token.string =~ "(名字|姓名)"}
 ({Token.category == PU} | {SpaceToken})[0,2]
 (
   {Sentence@length < 10}
-)
-:nameLookup
+):nameLookup
+):section
 {SpaceToken}
 -->
-:nameLookup.NAME = { kind = name, conf = strong}
+:nameLookup.NAME = { kind = name, conf = strong},
+:section.Section = {kind = name}
 
 Rule: NameNextToOthersRule
 Priority:100
@@ -49,7 +51,8 @@ Priority:100
  {SpaceToken.kind == control})[0,1]
 ({GENDER} | {MOBILE} | {CIVIL_STATE} | {BIRTHDAY} | {EMAIL} | {HUKOU} | {POLITICAL_STATUS} | {YEARS_OF_EXPERIENCE})
 -->
-:nameLookup.NAME = { kind = name, conf = strong, rule = nexttootherfeatures}
+:nameLookup.NAME = { kind = name, conf = strong, rule = nexttootherfeatures},
+:nameLookup.Section = {kind = name}
 
 /*-------------------------------------------------------------------------*/
 Phase: PossibleNameNextToOthers
@@ -68,7 +71,8 @@ Priority:100
  {SpaceToken.kind == control})[0,1]
 ({GENDER} | {MOBILE} | {CIVIL_STATE} | {BIRTHDAY} | {EMAIL} | {HUKOU} | {POLITICAL_STATUS} | {YEARS_OF_EXPERIENCE})
 -->
-:nameLookup.NAME = { kind = name, conf = possible, rule = nexttootherfeatures}
+:nameLookup.NAME = { kind = name, conf = possible, rule = nexttootherfeatures},
+:nameLookup.Section = {kind = name}
 
 Phase: PossibleName2
 Input:
@@ -92,4 +96,5 @@ Priority:10
  {SpaceToken.kind == control})[0,10]
 ({GENDER} | {MOBILE} | {CIVIL_STATE} | {BIRTHDAY} | {EMAIL} | {HUKOU} | {POLITICAL_STATUS} | {YEARS_OF_EXPERIENCE})
 -->
-:nameLookup.NAME = { kind = name, conf = possible, rule = nexttootherfeatures}
+:nameLookup.NAME = { kind = name, conf = possible, rule = nexttootherfeatures},
+:nameLookup.Section = {kind = name}
