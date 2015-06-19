@@ -1,11 +1,11 @@
 Phase: BirthdayFinder
-Input: Token Birthday SpaceToken
+Input: Token Identifier SpaceToken
 Options: control = appelt debug = false
 
 Rule: BirthdayRuleS1
 Priority: 200
 (
-  ({Birthday})
+  ({Identifier.majorType == birthday})
   ({Token.category == PU})?
   ({SpaceToken})[0,2]
   (

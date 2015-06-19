@@ -1,0 +1,15 @@
+Phase: SelfAssessmentFinder
+Input: Token Self_Assessment_ID Sentence Section
+Options: control = appelt debug = false
+
+Rule:StrongRule
+Priority:100
+(
+  {Self_Assessment_ID, Sentence}
+  (
+    ({Sentence, !Section})[0, 20]
+  ):saLookup
+):section
+-->
+:saLookup.SELF_ASSESSMENT = {rule = strong},
+:section.Section = {kind = self_assessment}

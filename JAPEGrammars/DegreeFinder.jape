@@ -1,15 +1,15 @@
 Phase: DegreeFinder
-Input: Token Degree_ID Lookup SpaceToken
+Input: Token Identifier DEGREE SpaceToken
 Options: control = appelt debug = false
 
 Rule: DegreeRule1
 Priority: 100
 (
-  {Degree_ID}
+  {Identifier.majorType == degree}
   ({Token.category == PU})?
   ({SpaceToken})[0,2]
   (
-    {Lookup.majorType == degree}
+    {DEGREE}
   ):degreeLookup
 ):section
 -->
@@ -20,7 +20,7 @@ Rule: DegreeRule2
 Priority: 50
 {SpaceToken}
 (
-  {Lookup.majorType == degree}
+	{DEGREE}
 )
 :degreeLookup
 {SpaceToken}
@@ -32,7 +32,7 @@ Rule: DegreeRule3
 Priority: 20
 {SpaceToken}
 (
-  {Lookup.majorType == degree}
+	{DEGREE}
 )
 :degreeLookup
 {SpaceToken}

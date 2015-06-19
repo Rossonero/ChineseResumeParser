@@ -1,11 +1,11 @@
 Phase: ApplyCompanyFinder
-Input: Token Apply_Company_ID SpaceToken Sentence
+Input: Token Identifier SpaceToken Sentence
 Options: control = appelt debug = false
 
 Rule:StrongApplyCompanyRule
 Priority:100
 (
-  {Apply_Company_ID}
+  {Identifier.majorType == apply_company}
   (({Token.category !~ "(NN|NR|NT)"})[0, 2])
   ({SpaceToken})[0,2]
   ({Sentence}):applycompanyLookup

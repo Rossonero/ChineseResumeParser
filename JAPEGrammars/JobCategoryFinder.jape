@@ -1,5 +1,5 @@
 Phase: Job_CatFinder
-Input: Token Career_Objective_Category_ID SpaceToken Sentence
+Input: Token Career_Objective_Category_ID SpaceToken Sentence Section
 Options: control = appelt debug = false
 
 Rule:StrongJob_locRule
@@ -9,7 +9,7 @@ Priority:100
 	({!Token.category =~ "(NN|NR|NT)"})[0, 2]
 	({SpaceToken})[0,2]
 	(
-	  {Sentence}
+	  {Sentence, !Section}
 	):job_catLookup
 ):section
 -->

@@ -20,6 +20,7 @@ JiguanFinder
 JobLocationFinder
 JobSalaryFinder
 JobCategoryFinder
+JobIndustryFinder
 MiscFinder
 MobileFinder
 PhoneFinder
@@ -27,6 +28,8 @@ Political_StatusFinder
 ResidencyFinder
 WeightFinder
 YearsOfExperienceFinder
+
+SelfAssessmentFinder
 
 NameFinder
 /*ProfileSection
