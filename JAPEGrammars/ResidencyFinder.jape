@@ -1,14 +1,14 @@
 Phase: RedidencyFinder
-Input: Token Lookup SpaceToken LOC GPE
+Input: Token Identifier SpaceToken LOC GPE
 Options: control = appelt debug = false
 
 Rule:StrongResidencyRule
 Priority:100
 (
-({Lookup.majorType == "residency"})
-({!Token.category =~ "(NN|NR|NT)"})[0, 2]
-({SpaceToken})[0,2]
-(({Token.category == PU} | {LOC} | {GPE})[1,5]
+  {Identifier.majorType == "residency"}
+  ({Token.category !~ "(NN|NR|NT)"})[0, 2]
+  ({SpaceToken})[0,2]
+  (({Token.category == PU} | {LOC} | {GPE})[1,5]
   ({SpaceToken})?
   (({Token.category == PU} | {LOC} | {GPE})[1,3]
   {SpaceToken})[0, 5]

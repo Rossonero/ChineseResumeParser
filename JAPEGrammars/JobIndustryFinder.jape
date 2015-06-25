@@ -1,15 +1,15 @@
 Phase: Job_IndustryFinder
-Input: Token Career_Objective_Industry_ID SpaceToken Sentence Section
+Input: Token Identifier SpaceToken Sentence Section
 Options: control = appelt debug = false
 
 Rule:StrongJob_locRule
 Priority:100
 (
-	{Career_Objective_Industry_ID}
-	({!Token.category =~ "(NN|NR|NT)"})[0, 2]
+    {Identifier.majorType == "co_industry"}
+	({Token.category !~ "(NN|NR|NT)"})[0, 2]
 	({SpaceToken})[0,2]
 	(
-	  {Sentence, !Section}
+	  {Sentence, !Section, !Identifier}
 	):job_industryLookup
 ):section
 -->

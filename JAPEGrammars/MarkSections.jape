@@ -1,5 +1,5 @@
-Imports: { 
-import static gate.Utils.*; 
+Imports: {
+import static gate.Utils.*;
 }
 
 Phase: MarkProfileSection
@@ -23,12 +23,12 @@ Rule: MarkSections
 		Long startOffset, endOffset = sec_heads.get(0).getStartNode().getOffset();
 		int index = 0;
 
-		if( section_headingAnnots.get("SectionHeading", profileHeadingFeature).size() == 0){	
+		if( section_headingAnnots.get("SectionHeading", profileHeadingFeature).size() == 0){
 			startOffset = new Long(0);
 			outputAS.add(startOffset, endOffset, "Section", profileHeadingFeature);
-		};  
+		};
 
-	    for (int i = 0; i < sec_heads.size() - 1; i++) {  
+	    for (int i = 0; i < sec_heads.size() - 1; i++) {
 	    	FeatureMap feature = Factory.newFeatureMap();
 			feature.put("kind", sec_heads.get(i).getFeatures().get("kind"));
 	    	startOffset = endOffset;

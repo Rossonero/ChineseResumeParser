@@ -1,5 +1,5 @@
 Phase: MISCFinder
-Input: Token GPE Current_Salary_ID Sentence
+Input: Token GPE LOC Current_Salary_ID Sentence
 Options: control = appelt debug = false
 
 Rule: NationRule
@@ -7,7 +7,7 @@ Rule: NationRule
   {Token.string == "国籍"}
   ({Token.category == PU})?
   (
-    {GPE}
+    {GPE} | {LOC.majorType == country}
   ):nationLookup
 ):section
 -->

@@ -1,13 +1,21 @@
 Phase: MobileFinder
-Input: Mobile_ID Token Section Address
+Input: Identifier Token Section Address
 Options: control = appelt debug = false
+
+Template: mobile = "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"
+Template: dash = "aaa"
+
+Macro: NORMALMOBILE
+(
+	{Token.category =~ "(CD|NT)", Token.string =~ [mobile]}
+)
 
 Rule: StrongMobileRuleBefore
 Priority:100
-({Mobile_ID}
+({Identifier.majorType == "mobile"}
 ({Token.category == PU})?
 (
- {Address.kind == "mobile"} | {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
+ {Address.kind == "mobile"} | NORMALMOBILE
 ):mobileLookup):section
 -->
 :mobileLookup.MOBILE = {conf = strong},
@@ -15,23 +23,23 @@ Priority:100
 
 Rule: StrongMobileRuleAfter
 Priority:80
-{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+{Token.string !~ "(QQ|qq|id|ID|Id)"}
 ({Token.category == PU})?
 ((
- {Address.kind == "mobile"} | {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
+ {Address.kind == "mobile"} | NORMALMOBILE
 ):mobileLookup
 ({Token})?
-({Mobile_ID})):section
+({Identifier.majorType == "mobile"})):section
 -->
 :mobileLookup.MOBILE = {conf = strong},
 :section.Section = {kind = mobileafter}
 
 Rule: NormalMobileRule
 Priority: 50
-{!Token.string =~ "(QQ|qq|id|ID|Id)"}
+{Token.string !~ "(QQ|qq|id|ID|Id)"}
 ({Token.category == PU})?
 ((
- {Address.kind == "mobile"} | {Token.category =~ "(CD|NT)", Token.string =~ "^([0+]?86)?\\W?(13|15|17|18|14)\\d{9}$"}
+ {Address.kind == "mobile"} | NORMALMOBILE
 ):mobileLookup):section
 -->
 :mobileLookup.MOBILE = {conf = normal},

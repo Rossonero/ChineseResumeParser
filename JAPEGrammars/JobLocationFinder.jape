@@ -1,11 +1,11 @@
 Phase: Job_locFinder
-Input: Token Career_Objective_Location_ID SpaceToken LOC GPE
+Input: Token Identifier SpaceToken LOC GPE
 Options: control = appelt debug = false
 
 Rule:StrongJob_locRule
 Priority:100
 (
-	{Career_Objective_Location_ID}
+    {Identifier.majorType == "co_location"}
 	({Token.category !~ "(NN|NR|NT)"})[0, 2]
 	({SpaceToken})[0,2]
 	(

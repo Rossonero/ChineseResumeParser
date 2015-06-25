@@ -6,7 +6,7 @@ Rule:StrongGenderRule
 Priority:100
 {SpaceToken}
 ({Token.string == "性别"}
-({!Token.category =~ "(NN|NR|NT)"} | {SpaceToken})[0, 2]
+({Token.category !~ "(NN|NR|NT)"} | {SpaceToken})[0, 2]
 ({Gender}):genderLookup):section
 {SpaceToken}
 -->

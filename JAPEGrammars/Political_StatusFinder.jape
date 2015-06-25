@@ -1,12 +1,12 @@
 Phase: Political_StatusFinder
-Input: Token Political_Status_ID Political_Status SpaceToken
+Input: Token Identifier Political_Status SpaceToken
 Options: control = appelt debug = false
 
 Rule:StrongPolitical_StatusRule
 Priority:100
 (
-  {Political_Status_ID}
-  ({!Token.category =~ "(NN|NR|NT)"})[0, 2]
+  {Identifier.majorType == "political_status"}
+  ({!Token.category !~ "(NN|NR|NT)"})[0, 2]
   ({SpaceToken})[0,2]
   ({Political_Status}):political_statusLookup
 ):section

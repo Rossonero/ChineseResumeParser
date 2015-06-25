@@ -6,7 +6,7 @@ Rule:StrongCivil_StateRule
 Priority:100
 (
   {Identifier.majorType == civil_state}
-  ({!Token.category =~ "(NN|NR|NT)"})[0, 2]
+  ({Token.category !~ "(NN|NR|NT)"})[0, 2]
   ({SpaceToken})[0,2]
   ({Civil_State} | {Token.string == "保密"}):civil_stateLookup
 ):section

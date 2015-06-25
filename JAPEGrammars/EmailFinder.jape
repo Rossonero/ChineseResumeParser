@@ -1,12 +1,12 @@
 Phase: EmailFinder
-Input: Token Lookup Address SpaceToken
+Input: Token Identifier Address SpaceToken
 Options: control = appelt debug = false
 
 Rule: StrongEmailRule
 Priority:100
 {SpaceToken}
 (
-  {Lookup.majorType == email}
+  {Identifier.majorType == email}
   ({Token.category == PU})?
   ({SpaceToken})[0,2]
 (

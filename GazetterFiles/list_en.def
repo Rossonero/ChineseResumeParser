@@ -1,2 +1,13 @@
 phone_identifier.lst:phone:telephone
 mobile_identifier.lst:phone:mobile
+city_abbreviation.lst:city:::LOC
+city_en.lst:city:::LOC
+city_cap.lst:city:::LOC
+city_uk.lst:city:::LOC
+city_uk_ambig.lst:city:::LOC
+city_lower.lst:city:::LOC
+country_lower.lst:country:::LOC
+country_en.lst:country:::LOC
+country_cap.lst:country:::LOC
+country_adj.lst:country:::LOC
+country_abbrev.lst:country:::LOC

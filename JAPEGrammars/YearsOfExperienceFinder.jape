@@ -4,13 +4,13 @@ Imports: {
 }
 
 Phase: YoeFinder
-Input: Sentence Token SpaceToken YrOExp
+Input: Sentence Token SpaceToken Identifier
 Options: control = appelt debug = false
 
 Rule:StrongYoeAfterRule
 {SpaceToken}
 (
-  {YrOExp} 
+  {Identifier.majorType == "years_of_experience"}
   ({SpaceToken})[0,2]
   (
     {Sentence}
@@ -26,7 +26,7 @@ Rule:StrongYoeAfterRule
     int end_offset = yoeInstance.getEndNode().getOffset().intValue();
 
     String yoe = doc.getContent().toString().substring(start_offset, end_offset);
-    Pattern yoePattern = Pattern.compile("(^[\\d一二三四五六七八九十].*年(以上)?$)| (应届)");
+    Pattern yoePattern = Pattern.compile("(^[\\d一二三四五六七八九十].*[年|year](以上)?$)| (应届)");
     Matcher yoeMatcher = yoePattern.matcher(yoe);
     if(yoeMatcher.find()){
       FeatureMap yoeFeature = Factory.newFeatureMap();
@@ -48,7 +48,7 @@ Rule:StrongYoeBeforeRule
       ({Token.category == M})?
       ({Token.string == "以上"})?
       ({Token})[0,2]
-     {YrOExp}
+    {Identifier.majorType == "years_of_experience"}
   ):yoeLookup
 ):section
 {SpaceToken}
